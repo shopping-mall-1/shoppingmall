@@ -150,12 +150,11 @@ a:active { color: red; }
 	<div class="login">
 		<h1>로그인</h1>
 		<form name="loginForm" id="loginForm" class="loginForm" method="post"> 
-
 			<input type="text" name="id" id="id" class="id" placeholder="아이디를 입력해주세요.">
          	<input type="password" id="password" name="password" class="passwd" onkeydown="press(this.form)" placeholder="비밀번호를 입력해주세요.">
          	<br><br>
-         	 <input type="button" id="find" class="id_find" value="아이디 찾기" onclick="location.href='findId.jsp'">
-           <input type="button" id="find" class="password_find" value="비밀번호 찾기" onclick="location.href='findPw.jsp'">
+			<input type="button" id="find" class="id_find" value="아이디 찾기" onclick="location.href='searchID.jsp'">
+			<input type="button" id="find" class="password_find" value="비밀번호 찾기" onclick="location.href='searchPassword.jsp'">
      		<input type="button" id="btn_login" class="login_btn" value="로그인" onclick="loginCheck()"> 
      		<input type="button" id="btn_join" class="join_btn" value="회원가입" onclick="location.href='signup.jsp'" > 
 		</form>
