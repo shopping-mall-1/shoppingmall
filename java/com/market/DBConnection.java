@@ -65,7 +65,7 @@ public class DBConnection {
 	public ArrayList<Product> GetAllProduct() {
 		ArrayList<Product> list = new ArrayList<Product>();
 		
-		query = "select code, name, company, price, stock, description, image from product";
+		query = "select code, name, company, price, stock, description, image, category, detail_category from product";
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
@@ -79,6 +79,8 @@ public class DBConnection {
 				item.setCompany(rs.getString("company"));
 				item.setStock(rs.getInt("stock"));
 				item.setImage(rs.getString("image"));
+				item.setCategory(rs.getString("category"));
+				item.setDetail_category(rs.getString("detail_category"));
 				
 				list.add(item);
 			}
