@@ -5,16 +5,18 @@
 	
 }
 
-body{
+#wrap{
 	
 	position: relative;
     width: 1050px;
     height: 100px;
+    margin-bottom:80px;
    
-   
-
 }
-
+#container{
+	height:100%;
+	width:100%;
+}
 header {
   width:1050px;
   height: 75px;
@@ -72,16 +74,16 @@ a:visited { text-decoration: none; }
 .dropdown{
   position : relative;
   display : inline-block;
-  width:150px;
+ 
+  z-index:2;
 }
 
 .dropdown-content{
   display : none;
-  position : relative;
-  z-index : 1; /*다른 요소들보다 앞에 배치*/
+  position : absolute;
   width:150px;
-  background: rgb(234,234,234);
- 
+  background:white;
+  z-index:999;
 
 }
 
@@ -93,17 +95,19 @@ a:visited { text-decoration: none; }
 
 .dropdown-content>ul>li{
   margin-bottom:10px;
+  z-index:999;
 }
 
 
 .dropdown:hover .dropdown-content {
   display: block;
+  z-index:2;
 }
 
-#nav-v2{width:150px;text-align:center;}
+#nav-v2{width:150px;text-align:center;z-index:999;}
 .menu-v2{
 	line-height:2;
-	
+	z-index:999;
 	position:relative;
 }
 .menu-v2 .submenu{
@@ -116,10 +120,11 @@ a:visited { text-decoration: none; }
 	top:-1px;
 	display:none;
 	margin-left:0; padding-left:0;
+	z-index : 1;
 }
 .submenu{
-	margin-left:0; 
 	padding-left:0;
+
 }
 .menu-v2:hover{
 	background-color:white;
@@ -130,5 +135,16 @@ a:visited { text-decoration: none; }
 	color:#222;
 }
 
+#menu{
+	display:inline-block;
+	align-items:center;
+	
+}
+
+.slider{
+	width:1900px;
+	height:370px;
+	
+}
 
 
