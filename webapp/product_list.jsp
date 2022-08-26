@@ -90,7 +90,10 @@ a:hover{
 </style>
 
 <script>
-
+function gotoDetail()
+{
+	location.href="ProductDetail.jsp";
+}
 	
 </script>
 
@@ -185,7 +188,7 @@ a:hover{
 </div>
 
 <!-- 상품 이미지, 이름, 가격, 설명 출력 - 카테고리, 상세 카테고리 여부에 따라 결정-->
-	<div class="productList container" align="center">
+	<div class="productList container" align="center" onclick="gotoDetail()">
 		<div class="row" align="center">
 			<% 
 				for(int i = 0; i < listOfProducts.size(); i++) {
@@ -197,7 +200,7 @@ a:hover{
 						
 			%>
 				<div class="col-lg-4">
-					<a id="choose" href="product.jsp?code=<%=item.getCode() %>">
+					<a id="choose" href="ProductDetail.jsp?code=<%=item.getCode() %>">
 					<section>
 						<img src="./img/product_img/<%=item.getImage() %>" class="img_size">
 						<br><br>
@@ -213,7 +216,7 @@ a:hover{
 					if(item.getDetail_category().equals(detail_category)){
 			%>
 					<div class="col-lg-4">
-						<a id="choose" href="product.jsp?code=<%=item.getCode() %>">
+						<a id="choose" href="ProductDetail.jsp?code=<%=item.getCode()%>">
 						<section>
 							<img src="./img/product_img/<%=item.getImage() %>" class="img_size">
 							<br><br>
@@ -224,7 +227,7 @@ a:hover{
 						</a>
 					</div>
 			<% 
-						}
+		   				session.setAttribute("p_code",item.getCode());	}
 					}
 				}
 			%>
