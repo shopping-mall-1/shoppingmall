@@ -21,7 +21,6 @@ public class DBConnection {
 	private String query = null;
 	private Connection con = null;
 	private Statement stmt = null;
-	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
 	private DataSource ds = null;
@@ -31,18 +30,13 @@ public class DBConnection {
 	 */
 	public void AddProductToDB(Product item) {
 		query = "insert into product "
-				+"(code, name, company, price, stock, description, image) "
-				+"values (?,?,?,?,?,?,?)";
+				+"(code, name, company, price, stock, description, image, category, detail_category) "
+				+"values (" + item.getCode() + ", '" + item.getName() + "','" + item.getCompany() + "',"
+				+ item.getPrice() + "," + item.getStock() + ",'" + item.getDescription() + "','"
+				+ item.getImage() + "','" + item.getCategory() + "','" + item.getDetail_category() + "')";
 		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(   1, item.getCode());
-			pstmt.setString(2, item.getName());
-			pstmt.setString(3, item.getCompany());
-			pstmt.setInt(   4, item.getPrice());
-			pstmt.setInt(   5, item.getStock());
-			pstmt.setString(6, item.getDescription());
-			pstmt.setString(7, item.getImage());
-			pstmt.executeUpdate();
+			stmt = con.createStatement();
+			stmt.executeUpdate(query);
 		} catch(Exception e){ e.printStackTrace(); }
 	}
 	
@@ -52,13 +46,10 @@ public class DBConnection {
 	public void AddProductToCart(String customer, int p_code, int p_count) {
 		query = "insert into cart "
 				+ "(customer, p_code, p_count) "
-				+ "values(?,?,?)";
+				+ "values('" + customer + "'," + p_code + "," + p_count + ")";
 		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, customer);
-			pstmt.setInt(   2, p_code);
-			pstmt.setInt(   3, p_count);
-			pstmt.executeUpdate();
+			stmt = con.createStatement();
+			stmt.executeUpdate(query);
 		} catch(Exception e){ e.printStackTrace(); }
 	}
 	
@@ -99,7 +90,6 @@ public class DBConnection {
 	public void CloseConnection() {
 		try {
 			if(stmt != null) stmt.close();
-			if(pstmt != null) pstmt.close();
 			if(rs != null) rs.close();
 			if(con != null) con.close();
 			
@@ -107,23 +97,24 @@ public class DBConnection {
 	}
 
 	public Product getproduct(int code) {
-			
-			Product item = new Product();
-			query = "select code, name, company, price, stock, description, image from product where code = " + code;
-			try {
-				stmt = con.createStatement();
-				rs = stmt.executeQuery(query);
+
+		Product item = new Product();
+		query = "select code, name, company, price, stock, description, image, category, detail_category from product where code=" + code;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
 				
-			        rs.next(); {
-					item.setCode(rs.getInt("code"));
-					item.setName(rs.getString("name"));
-					item.setPrice(rs.getInt("price"));
-					item.setDescription(rs.getString("description"));
-					item.setCompany(rs.getString("company"));
-					item.setStock(rs.getInt("stock"));
-					item.setImage(rs.getString("image"));
-				}
-			} catch(Exception e){ e.printStackTrace(); }
-			return item;
-		}	
+			rs.next();
+			item.setCode(rs.getInt("code"));
+			item.setName(rs.getString("name"));
+			item.setPrice(rs.getInt("price"));
+			item.setDescription(rs.getString("description"));
+			item.setCompany(rs.getString("company"));
+			item.setStock(rs.getInt("stock"));
+			item.setImage(rs.getString("image"));
+			item.setCategory(rs.getString("category"));
+			item.setDetail_category(rs.getString("detail_category"));
+		} catch(Exception e){ e.printStackTrace(); }
+		return item;
+	}	
 }
