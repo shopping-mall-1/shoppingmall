@@ -105,4 +105,25 @@ public class DBConnection {
 			
 		} catch(Exception e){ e.printStackTrace(); }
 	}
+
+	public Product getproduct(int code) {
+			
+			Product item = new Product();
+			query = "select code, name, company, price, stock, description, image from product where code = " + code;
+			try {
+				stmt = con.createStatement();
+				rs = stmt.executeQuery(query);
+				
+			        rs.next(); {
+					item.setCode(rs.getInt("code"));
+					item.setName(rs.getString("name"));
+					item.setPrice(rs.getInt("price"));
+					item.setDescription(rs.getString("description"));
+					item.setCompany(rs.getString("company"));
+					item.setStock(rs.getInt("stock"));
+					item.setImage(rs.getString("image"));
+				}
+			} catch(Exception e){ e.printStackTrace(); }
+			return item;
+		}	
 }
