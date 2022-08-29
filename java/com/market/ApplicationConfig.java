@@ -20,7 +20,8 @@ public class ApplicationConfig implements ServletContextListener {
 		
 		// 이후 추가옵션
 		hikariConfig.setConnectionTestQuery("select now() from dual");
-		hikariConfig.setMaximumPoolSize(3);
+		hikariConfig.setMaximumPoolSize(20);
+		hikariConfig.setMinimumIdle(20);
 		hikariConfig.setPoolName("Mariadb-HikariCP");
 
 		// 하나의 CP
