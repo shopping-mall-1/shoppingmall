@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>관리자 페이지</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+<h3>관리자 임시 페이지</h3>
+<a href="index_home.jsp">처음으로</a><br>
+<a href="addProduct.jsp">상품 등록</a><br>
+<a href="Account/logout.jsp">로그아웃</a>
+
+</body>
+</html>

@@ -1,6 +1,5 @@
 <%@page import="javax.sql.DataSource"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>    
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>    
 <%@page import="java.sql.*"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalDateTime"%>
@@ -19,6 +18,7 @@
 	//로그인 창에서 파리미터로 받은 값
 	String id = request.getParameter("id");
 	String password = request.getParameter("password");
+	String role = "";
 
 	Connection con = null;
 	
@@ -38,8 +38,8 @@
 	String q_checkPassword = "select count(*) as id_count from member " 
 							+ "where id='" + id + "' and "
 							+ "password='" + password + "'";
-	// 세션 유지를 위해 id를 가져옴
-	String q_sessionID = "select name from member where id = '" + id + "'";
+	// 세션 유지를 위해 id와 role을 가져옴
+	String q_sessionID = "select name, role from member where id = '" + id + "'";
 	
 	
 	// DB 접속 부분을 분리할 것.
@@ -59,14 +59,18 @@
 		String name = "";
 		while(rs1.next()) id_count = rs1.getInt("id_count");
 		while(rs2.next()) pwd_count = rs2.getInt("id_count");
-		while(rs3.next()) name = rs3.getString("name");
+		while(rs3.next()) {
+			name = rs3.getString("name");
+			role = rs3.getString("role");
+		}
 		
 		//아이디가 존재하고 패스워드도 틀리지 않은 사용자
 		if(id_count != 0 && pwd_count !=0){
-			
-			session.setMaxInactiveInterval(3600*7); //세션 유지 기간 설정
-			session.setAttribute("id", id); //세션 생성
+			// 세션 설정. 아이디, 이름, 역할(일반 사용자/관리자)
+			session.setMaxInactiveInterval(3600*7);
+			session.setAttribute("id", id);
 			session.setAttribute("name", name);
+			session.setAttribute("role", role);
 						
 			stmt1.close();
 			stmt2.close();
