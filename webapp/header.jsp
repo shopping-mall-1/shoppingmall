@@ -67,16 +67,16 @@ $(document).ready(function(){
 		      
 		       <div id="menu_list" style="  display:flex;">			      
 			       <div style=" align-items:center; margin-left:160px;">
-				      <a href="productList2.jsp"><span>신상품</span> </a>
+				      <a href="productAll.jsp?menu=신상품"><span>신상품</span> </a>
 			      </div>
 	    		 <div style="align-items:center; margin-left:160px;">
-				      <span>베스트</span>
+				      <a href="productAll.jsp?menu=베스트"><span>베스트</span> </a>
 			      </div>
 			      <div style=" align-items:center; margin-left:160px;">
-				      <span>알뜰쇼핑</span>
+				      <a href="productAll.jsp?menu=알뜰쇼핑"><span>알뜰쇼핑</span> </a>
 			      </div>
 	    		 <div style=" align-items:center; margin-left:160px;">
-				      <span>특가/혜택</span>
+				      <a href="productAll.jsp?menu=특가/혜택"><span>특가/혜택</span> </a>
 			      </div>	
 		     </div> 
 		      </div>
