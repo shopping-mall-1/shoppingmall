@@ -1,3 +1,7 @@
+<%@page import="java.sql.*"%>
+<%@page import="com.jsp.util.Page"%>
+<%@page import="java.net.URLDecoder"%>
+<%@page import="javax.sql.DataSource"%>
 <%@page import="com.market.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.market.DBConnection"%>
@@ -7,6 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <jsp:include page="header.jsp" />
 <link rel="stylesheet" type="text/css" href="css/productDetail.css">
@@ -19,6 +24,7 @@ position: absolute;
 left: 50%;
 transform: translateX(-50%);
 }
+
 #container{
 height:100%;
 width:100%;
@@ -26,7 +32,6 @@ width:100%;
 }
 
 #side_left{
-
 width:410px;
 float:left;
 margin:20px;
@@ -34,11 +39,11 @@ margin-top:5%;
 }
 
 #side_right{
-
 width:450px;
 float:right;
 margin:30px;
 margin-right:7%;
+line-height: 1.2;
 }
 
 #side_right_box{
@@ -56,6 +61,14 @@ margin:5px;
 margin-top:15%;
 text-align: center;
 }
+
+#bottom_box{
+width:100%;
+margin:5px;
+margin-top:100%;
+text-align: center;
+}
+
 #count_div{
 	width:150px;
 	display:flex;
@@ -68,8 +81,8 @@ text-align: center;
 	margin-left:20px;
 }
 
-#btn {
-	background-color: purple;
+.btn {
+	background-color: rgb(95, 0, 128);
 	padding: 15px 30px;
 	margin: 2px;
 	border: none;
@@ -77,19 +90,19 @@ text-align: center;
 	text-align: center;
 	text-decoration: none;
 	font-size: 16px;
+	color: white;
+	font-weight: bold;
 	display: inline-block;
 	cursor: pointer;
 	-webkit-transition-duration: 0.4s;
 	transition-duration: 0.4s;
-	width: 200px;
+	width: 160px;
 	height: 50px;
-	position: relative; 
-	left: 1000px
+	
 }
 
 #btn1:hover, .btn2:hover{
 	background-color: gray;
-	color: white;
 }
 
 </style>
@@ -162,33 +175,43 @@ $(function(){
 	int p_code = Integer.parseInt(request.getParameter("code"));
 	Product item = new Product();
 	item = con.getproduct(p_code);
-
 	int price = item.getPrice();
 	con.CloseConnection();
+	
+	DBConnection con1 = new DBConnection();
+	ArrayList<Product> listOfProducts = new ArrayList<Product>();
+	con1.StartConnection(getServletConfig());
+	listOfProducts = con1.GetAllProduct();
+	con1.CloseConnection();
+	
 	%> 
 <div class="container">
-	<div style="width:1000px;height:50px"></div>
+	
+	<div style="width:1050px;height:50px"></div>
 	<div id = "mid_content">
     		
     		<div id = "side_left" ><img src = <%=item.getImage() %> width=400px; height=500px;> </div>
 		
-		<div id = "side_right" align="left"  >
+		<div id = "side_right" align="left" >
 			
-			<h3><%=item.getName() %></h3>
+			<h3><strong><%=item.getName() %></strong></h3>
 			<p><h3><%=item.getPrice() %>원</h3>
-			<p>제조사 <%=item.getCompany() %>
+			<hr size=1px>
+			<p>회사 <%=item.getCompany() %>
+			<hr size=1px>
 			<p><h5>상세정보</h5> 
 			<p><%=item.getDescription() %>
+			<hr size=1px>
 	
 			<div id="count_div">
-				수량<div id="count_div1"><input id='btn_minus' type='button' onclick='count("minus")' value='-'/></div>
+				<h4 style="font-weight: bold">수량</h4><div id="count_div1"><input id='btn_minus' type='button' onclick='count("minus")' value='-'/></div>
 				<div id='result'>1</div><!-- 선택한 수량으로 바꾸기 -->
 				<div id="count_div1"><input id='btn_plus' type='button' onclick='count("plus")' value='+'/></div>
-			</div>			
+			</div>
+			<hr size=1px>			
 			<div id = "side_right_box2">
 			<div id="price_div" style="display:flex;">
-				<p>총 상품금액 : </p>	
-				<h4 id="price" ><%=price %></h4>
+				<p>총 상품금액 :<h3 id="price" style="font-weight: bold"><%=price %></h3>
 			</div>	
 			</div>
 			<script>
@@ -222,6 +245,7 @@ $(function(){
 			<div id = "side_right_box">
 				<button class="btn btn1" id="btn_cart">장바구니 담기</button>
 				<button class="btn btn2" id="btn_order">바로주문</button>
+
 			</div><br>
  
 			<div class="popup-wrap" id="popup" style="display:none;"> 
@@ -245,14 +269,27 @@ $(function(){
 	      			</div>
 	    		</div>
 			</div>
-		
+		</div>		
+		<div id = "bottom_box">
+		<p>인기상품
+		<hr size=1px>
+			<div class="container">
+			<div class="row" align="center">
+				<% for(int i = 0; i < 4; i++) {
+					Product item2 = listOfProducts.get(i); 		%>
+			<div class="col-md-3">
+				<p><a href="productdetail.jsp?code=<%=item2.getCode() %>"><img src = <%=item2.getImage() %> width=100px; height=120px;></a>
+				<p><%=item2.getName() %>
+				<p><%=item2.getPrice() %>원
+			</div>
+			<% } %>
 		</div>
-			
-	</div> 
-
+		<hr >
+	</div>
+		</div>
+	
 </div>
-
-
+</div>
 
 </body>
 </html>
