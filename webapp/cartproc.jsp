@@ -14,9 +14,9 @@
 	DBConnection con = new DBConnection();
 	con.StartConnection(getServletConfig());
 	
-	int p_code = (Integer)session.getAttribute("code");
+	//int p_code = (Integer)session.getAttribute("code");
 	
-	//int p_code = Integer.parseInt(request.getParameter("code"));
+	int p_code = Integer.parseInt(request.getParameter("code"));
 	System.out.print(p_code+", ");
 	int p_count = Integer.parseInt(request.getParameter("count"));
 	int price = Integer.parseInt(request.getParameter("price"));
@@ -26,12 +26,10 @@
 	
 	
 	System.out.print(p_count+" ,"+price);
-
 	con.CloseConnection();
 	
 	String userid = (String)session.getAttribute("id");
 	System.out.print(userid);
-
 	//지금 선택한 제품이 cart테이블에 이미 있다면-> 수량만 더해서 추가
 	String query_check = "select count(p_code), p_code ,p_count from cart where customer='"+userid+"' and p_code= "+p_code;
 	Connection con_check = null;
@@ -85,12 +83,8 @@
 		}
 		
 	}
-
-
 	
-
 	
-
 %>
 </body>
 </html>

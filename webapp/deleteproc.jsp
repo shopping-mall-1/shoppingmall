@@ -17,7 +17,6 @@
 	
 	String userid = (String)session.getAttribute("id");
 	System.out.print(userid);
-
 	
 	
 	if(deleteWhat.equals("this")){
@@ -29,7 +28,6 @@
 		
 		System.out.println(query_delete);
 		DataSource ds_check = (DataSource)this.getServletContext().getAttribute("dataSource");
-
 		con_delete = ds_check.getConnection();
 		stmt_delete = con_delete.createStatement();
 		stmt_delete.executeUpdate(query_delete);
@@ -61,7 +59,6 @@
 			stmt_check_del.executeUpdate(query_check_del);
 			System.out.println("[삭제쿼리] : "+query_check_del);
 		}
-
 		con_check_del.close();
 		stmt_check_del.close();
 		}catch(Exception e){
@@ -77,7 +74,6 @@
 		
 		System.out.println(query_delete);
 		DataSource ds_check = (DataSource)this.getServletContext().getAttribute("dataSource");
-
 		con_delete = ds_check.getConnection();
 		stmt_delete = con_delete.createStatement();
 		stmt_delete.executeUpdate(query_delete);
@@ -90,7 +86,6 @@
 	
 	
 	
-
 %>
 </body>
-</html>
+</html> 
