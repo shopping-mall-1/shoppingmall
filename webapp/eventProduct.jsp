@@ -121,40 +121,8 @@ a:hover{
 	
 %> 
 
-<!-- 배너광고 구역 시작 -->
-<section>
-	<div class="container" align="center">
-	<div class="row">
-		<div class="col">
-<%
-
-	//String path = "\"/img/" + category + ".jpg\"";
-	//이미지 경로 String으로 만들어주기
-	//String path = "C:\\eclipse_work\\Shop\\src\\main\\webapp\\img\\" + category + ".jpg";
-	String path = "C:\\eclipse_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp7\\wtpwebapps\\Shop\\img\\banner_img\\" + category + ".jpg";
-	File img = new File(path);
-	
-	System.out.println(path);
-	System.out.println(img.exists());
-	
-	//배너 이미지가 존재하면
-	if(img.exists()){
-%>
-		<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>"> <img src = "/img/banner_img/<%=category %>.jpg"></a>
-<%
-	}else{ //배너이미지가 존재하지 않으면 이벤트 배너 띄우기
-%>
-		<a href="eventNow.jsp?category=추석"> <img src = "/img/banner_img/이벤트.jpg"></a>
-<% } %>		
-		</div>
-	</div>
-	</div>
-	<br><br>
-</section>
-<!-- 배너광고 구역 끝  -->
-
 <!-- 카테코리 구역 시작-->
-<h3 align="center"><b> <%=category %></b></h3><br>
+<h3 align="center"><b> 금주의 <%=category %></b></h3><br>
 <!-- 카테고리 구역 끝  -->
 
 <!-- 세부 카테고리 구역 시작 -->
@@ -167,7 +135,7 @@ a:hover{
 			for(int i = 0; i < menu[categoryNum].length; i++) {
 		%>
 				<div class="c_menu col-3" align="left">
-					<a href="productList.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=menu[categoryNum][i] %>"> <%=menu[categoryNum][i] %> </a>
+					<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=menu[categoryNum][i] %>"> <%=menu[categoryNum][i] %> </a>
 				</div>
 		<%
 			}
@@ -182,18 +150,18 @@ a:hover{
 
 <%
 	// 상품 정보를 가져오는 쿼리
-	String query = "select code, name, price, stock, description, image, category as tbl_category, detail_category as tbl_detail, regist_date, benefit from product where category= '" + category + "'";
+	String query = "select code, name, price, stock, description, image, category as tbl_category, detail_category as tbl_detail, regist_date, benefit, this_week from product where this_week= 'Y' and category= '" + category + "'";
 	
 	// product 테이블의 행 개수를 모두 세는 쿼리
-	String query_total = "select Count(*) as total from product";
+	String query_total = "select Count(*) as total from product where this_week = 'Y'";
 	
 	// 세부 카테코리 값에 따라 쿼리 조건 추가
 	if(detail_category== null || detail_category.equals("전체보기")){
 		query += "";
-		query_total += " where category= '" + category + "'";
+		query_total += " and category= '" + category + "'";
 	}else if(detail_category != null){
 		query += " and detail_category= '" + detail_category + "'";
-		query_total += " where detail_category= '" + detail_category + "'";
+		query_total += " and detail_category= '" + detail_category + "'";
 	}
 	
 	// 정렬 값에 따라 쿼리 정렬 추가
@@ -231,6 +199,7 @@ a:hover{
 	String tbl_detail = "";
 	String regist_date = "";
 	float benefit = 0.00f;
+	String this_week = "";
 	
 	String total = "";
 	
@@ -259,12 +228,12 @@ a:hover{
 		총 <%=total %>건
 	</div>
 	<div class="col" align="right">
-		<a href="productList.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=detail_category %>&sort=추천순">추천순</a> | 
-		<a href="productList.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=detail_category %>&sort=신상품순">신상품순</a> | 
-		<a href="productList.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=detail_category %>&sort=판매량순">판매량순</a> | 
-		<a href="productList.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=detail_category %>&sort=혜택순">혜택순</a> | 
-		<a href="productList.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=detail_category %>&sort=낮은가격">낮은 가격순</a> | 
-		<a href="productList.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=detail_category %>&sort=높은가격">높은 가격순</a>
+		<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=detail_category %>&sort=추천순">추천순</a> | 
+		<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=detail_category %>&sort=신상품순">신상품순</a> | 
+		<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=detail_category %>&sort=판매량순">판매량순</a> | 
+		<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=detail_category %>&sort=혜택순">혜택순</a> | 
+		<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=detail_category %>&sort=낮은가격">낮은 가격순</a> | 
+		<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>&detail_category=<%=detail_category %>&sort=높은가격">높은 가격순</a>
 	</div>
 </div>
 <!-- 정렬 조건 구역 끝  -->

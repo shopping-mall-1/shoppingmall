@@ -36,7 +36,7 @@ $(document).ready(function(){
 </script>
 <body>
 
-<div id="container">
+<div id="container"  align="center">
 
 	<div id="wrap">
 	<div id="user_menu">
@@ -92,7 +92,7 @@ $(document).ready(function(){
 				      <a href="productAll.jsp?menu=알뜰쇼핑"><span>알뜰쇼핑</span> </a>
 			      </div>
 	    		 <div style=" align-items:center; margin-left:160px;">
-				      <a href="productAll.jsp?menu=특가/혜택"><span>특가/혜택</span> </a>
+				      <a href="eventList.jsp?menu=특가/혜택"><span>특가/혜택</span> </a>
 			      </div>	
 		     </div> 
 		      </div>

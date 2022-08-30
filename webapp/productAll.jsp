@@ -1,21 +1,18 @@
-<%@page import="java.lang.ProcessBuilder.Redirect"%>
-<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
 <%@page import="java.sql.*"%>  
 <%@page import="javax.sql.DataSource"%>
+<%@page import="java.text.DecimalFormat"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <link rel="stylesheet" type="text/css" href="css/product_list.css"> -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
 
 <style>
-
 
 a{ 
 	color:#000000;
@@ -38,7 +35,6 @@ a:hover{
 
 
 .category_box{
-
 	box-sizing: border-box;
 	width:1050px;
 	border: 1px solid #D9D9D9;
@@ -48,7 +44,6 @@ a:hover{
 }
 
 .category_innerbox{
-
 	box-sizing: border-box;
 	width:900px;
 	border: 1px solid #ffffff;
@@ -60,6 +55,7 @@ a:hover{
 .c_menu{
 	padding:15px;
 	margin-left:0;
+	font-size:13px;
 }
 
 .sort_box{
@@ -89,28 +85,23 @@ a:hover{
 </style>
 
 </head>
+
 <body>
 
-<!-- header 들어갈 구역 -->
+<!-- header 구역 시작 -->
 <section>
-<%-- <jsp:include page="header.jsp" /> --%>
-<br>
+	<jsp:include page="header.jsp" />
+	<br>
 </section>
-
+<!-- header 구역 끝 -->
 
 <%
 	request.setCharacterEncoding("utf-8");
 	String menu = request.getParameter("menu");
 	String sort = request.getParameter("sort");
 	
-/* 	System.out.println(category);
-	System.out.println(categoryNum);
-	System.out.println(detail_category); */
-	
 	String query = "";
 	String query_total = "";
-/* 	String query = "select code, name, price, description, image, category as tbl_category, detail_category as tbl_detail from product where category= '" + category + "'"; */
-/* 	String query_total = "select Count(*) as total from product"; */
 	
 	if(menu.equals("신상품")){
 		//상품등록일자가 30일 이내인 상품정보만 가져오는 쿼리
@@ -137,6 +128,7 @@ a:hover{
 		response.sendRedirect("eventList.jsp");
 	}
 	
+	// 정렬 값에 따라 쿼리 정렬 추가
 	if(sort != null){
 		if(sort.equals("낮은가격"))
 			query += " order by price";
@@ -196,7 +188,7 @@ a:hover{
 
 <!-- 배너광고 시작 -->
 <!-- 배너 이미지 사이즈 1050x400  -->
-<%
+<%-- <%
 	if(menu.equals("신상품") || menu.equals("알뜰쇼핑")){
 %>
 <section>
@@ -211,7 +203,7 @@ a:hover{
 </section>
 <%
 	}
-%>
+%> --%>
 <!-- 배너광고 끝 -->
 
 <!-- 카테코리 -->
