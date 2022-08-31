@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="javax.sql.DataSource"%>
 <%@page import="java.sql.Statement"%>
@@ -22,7 +23,7 @@
 		int[] code = new int[str_code.length];
 		for(int i=0;i<str_code.length;i++){
 				code[i] = Integer.parseInt(str_code[i]);
-				System.out.print("체크된 값 : "+code[i]+" ");
+				System.out.println("체크된 값 : "+code[i]+" ");
 		}
 
 		%>
@@ -60,58 +61,108 @@
 			</div>
 			</div>
 			<% 
+			
+			ArrayList<Integer> codeList = new ArrayList<Integer>();
+			ArrayList<Integer> countList = new ArrayList<Integer>();
+			ArrayList<String> nameList = new ArrayList<String>();
+			ArrayList<Integer> priceList = new ArrayList<Integer>();	
+			ArrayList<String> imageList = new ArrayList<String>();	
+			ArrayList<ResultSet> codes = new ArrayList<ResultSet>();
 			try{
 				Connection con_list = null;
-				Statement stmt_list = null;
+
 				String query_list="";
-				ResultSet rs_list=null;
+								
 				DataSource ds_check = (DataSource)this.getServletContext().getAttribute("dataSource");
-			
+				con_list = ds_check.getConnection();
+				
+				Statement stmt_list = null;
+				ResultSet rs_list=null;
+
 				//카트 테이블에서 가져오기
 				for(int i=0;i<code.length;i++){
-					query_list = "SELECT a.p_code, b.code, a.p_count, b.name, b.price, b.image FROM cart AS a "+
-							"INNER JOIN product AS b ON b.code="+code[i]+" AND a.p_code="+code[i]+" AND a.customer='"+userid+"'";
-					con_list = ds_check.getConnection();
+
 					stmt_list = con_list.createStatement();
+					query_list = "SELECT a.p_code as p_code, b.code as code, a.p_count as p_count, b.name as name, b.price as price, b.image as image FROM cart AS a "+
+							"INNER JOIN product AS b ON b.code="+code[i]+" AND a.p_code="+code[i]+" AND a.customer='"+userid+"'";
+
 					rs_list = stmt_list.executeQuery(query_list);
 					System.out.println(code[i]);
 					System.out.println("주문 목록 쿼리 : "+query_list);
+					codes.add(rs_list); //rs값을 codes 배열에 인서트...
+					//stmt_list.close();
+					//rs_list.close();
+					query_list = "";
+					stmt_list = null;
+					
 				}			
+				
+				System.out.println("codes = " + codes);
+				
 				int p_code=0;
 				int p_count=0;
 				String name ="";
 				int price=0;
 				String image="";
+			
+				int index=0;
+				System.out.println("resultsetarray크기: "+codes.size());
 				
+				%>
+			
+				<%
 				
-				while(rs_list.next()){
+				for(int i=0;i<codes.size();i++){
+					codes.get(i).next();
 					
-					p_code = rs_list.getInt("a.p_code");
-					p_count = rs_list.getInt("a.p_count");
-					name = rs_list.getString("b.name");
-					price = rs_list.getInt("b.price")*p_count;
+					System.out.println(i + "번째 시작");
+					p_code = codes.get(i).getInt("p_code");
+					codeList.add(p_code);
+					//System.out.print(p_code+" "+codeList.get(index));
+					
+					System.out.println("p_code = " + p_code);
+					
+					p_count = codes.get(i).getInt("p_count");
+					countList.add(p_count);
+					System.out.println("p_count = " + p_count);
+								
+					name = codes.get(i).getString("name");
+					nameList.add(name);
+					System.out.println("name = " + name);
+					
+					price = codes.get(i).getInt("price")*p_count;
+					priceList.add((Integer)price);
+					System.out.println("price = " + price);
 					
 					System.out.println("상품 "+name);
-					image = rs_list.getString("b.image");
-		%>
+					image = codes.get(i).getString("image");
+					imageList.add(image);
+					System.out.println("image = " + image);
+					
+					System.out.println("codeList[" + i + "] = " + codeList);
+					
+					System.out.println(i + "번째 끝");
+					
+			%>
 			<div class="box_2">
-				<span class="b2t2_1"><img src="<%=image %>"></span>
+				<span class="b2t2_1"><img src="<%=imageList.get(i) %>"></span>
 				<span class="b2t2_2">
-					<span class="b2t2_2_1"><%=name %></span>
+					<span class="b2t2_2_1"><%=nameList.get(i) %></span>
 					<span data-testid="content-product-name" class="b2t2_2_2">
 							
 					</span>
 				</span>
-				<span class="b2t2_3"><%=p_count %>개</span>
+				<span class="b2t2_3"><%=countList.get(index) %>개</span>
 				<span class="b2t2_4">
-					<span class="b2t2_4_1"><%=price %></span>
+					<span class="b2t2_4_1"><%=priceList.get(index) %></span>
 				</span>
 			</div>
-			<%}
+			<%
+			index++;
+			}
 				
 				con_list.close();
-				stmt_list.close();
-				rs_list.close();
+
 				
 				}catch(Exception e){
 				e.printStackTrace();
