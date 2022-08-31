@@ -34,19 +34,19 @@ $(document).ready(function(){
 			
 
 })
+
 //한 줄 삭제
 function deleteThis(){
 	
 	var item = document.querySelector("button[class=deleteThis]")
 	var code = item.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.value;
-	console.log(code);
+	console.log(code);//현재 포지션 상품코드 값 받기
     	event.target.parentElement.parentElement.parentElement.remove(); //화면에서 사라지게...
     	
     	//ajax로 deleteproc.jsp에 해당 상품 코드 보내기
 		//var code=0;
 		var what = 'this';
-		//code=$('#code').val();  //현재 포지션 상품코드 값 받기
-		console.log(code);
+
 		var allData = {"code":code,"deleteWhat":what};
 		
 		$.ajax({
@@ -171,6 +171,7 @@ $(document).on('click','.check_child',function(){
 	String query_cart = "SELECT a.p_code, a.p_count, b.name, b.price, b.image FROM cart AS a "+
 			"INNER JOIN product AS b ON a.p_code=b.code AND a.customer='"+userid+"'";
 	
+	
 	DataSource ds_cart = (DataSource)this.getServletContext().getAttribute("dataSource");
 	con_cart = ds_cart.getConnection();
 	stmt_cart = con_cart.createStatement();
@@ -195,7 +196,7 @@ $(document).on('click','.check_child',function(){
  	<input id="count_cart" type="hidden" value="<%=isInCart %>" />
  	<div id="nocart"><center id="nocart" style=" align-items: center; margin-top:50px;">장바구니에 담긴 상품이 없습니다.</center></div>
  			
- <form name="orderform" id="orderform" method="post" class="orderform" action="order.jsp" onsubmit="return false;">
+ <form name="orderform" id="orderform" method="post" class="orderform" action="order.jsp"> <!--onsubmit="return false;"  -->
     
             <input type="hidden" name="cmd" value="order">
             <div class="basketdiv" id="basket">
@@ -237,7 +238,7 @@ $(document).on('click','.check_child',function(){
                         
                         <div class="img" style="margin-bottom:20px;"><img src="<%=image %>" width="60"></div>
                         <div class="pname">
-                            <a href="productdetail.jsp?code=<%=p_code %>"><span><%=name %></span></a>
+                            <a href="productdetail.jsp?code=<%=p_code %>"><span name="name"><%=name %></span></a>
                         </div>
                     </div>
                     <div class="subdiv">
@@ -308,6 +309,7 @@ $(document).on('click','.check_child',function(){
 	    })
 		
 	 	$('#sum_p_price').text("총 금액 : " + this.sum);
+	   
  	}
 	
     //원하는 행 수량 변경
@@ -356,7 +358,7 @@ $(document).on('click','.check_child',function(){
 	
 
     }
-
+    
  	</script>
  	 
            <div class="right-align basketrowcmd">
@@ -367,15 +369,16 @@ $(document).on('click','.check_child',function(){
         <div class="bigtext right-align sumcount" id="sum_p_num"><script> sumPnum();</script></div>
     
         <div class="bigtext right-align box blue summoney" id="sum_p_price" ><script> sumPrice();</script></div>
-
+		
         <div id="goorder" class="">
             <div class="clear"></div>
             <div class="buttongroup center-align cmd">
-                <a href="order.jsp">주문하기</a>
+                <input type="submit" value="선택 상품 주문하기" width="100px">
             </div>
         </div>
         </div>
       </form>
+
  </div>			
 </div>
 </div>

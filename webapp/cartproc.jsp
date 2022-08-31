@@ -11,22 +11,22 @@
 </head>
 <body>
 <%
-	DBConnection con = new DBConnection();
-	con.StartConnection(getServletConfig());
+	//DBConnection con = new DBConnection();
+	//con.StartConnection(getServletConfig());
 	
-	//int p_code = (Integer)session.getAttribute("code");
-	
-	int p_code = Integer.parseInt(request.getParameter("code"));
+	int p_code = (Integer)session.getAttribute("code");
+		
+	//int p_code = Integer.parseInt(request.getParameter("code"));
 	System.out.print(p_code+", ");
 	int p_count = Integer.parseInt(request.getParameter("count"));
 	int price = Integer.parseInt(request.getParameter("price"));
 	
-	Product item = new Product();
-	item = con.getproduct(p_code);
+	//Product item = new Product();
+	//item = con.getproduct(p_code);
 	
 	
 	System.out.print(p_count+" ,"+price);
-	con.CloseConnection();
+	//con.CloseConnection();
 	
 	String userid = (String)session.getAttribute("id");
 	System.out.print(userid);
