@@ -185,15 +185,15 @@ a:hover{
 	String query = "select code, name, price, stock, description, image, category as tbl_category, detail_category as tbl_detail, regist_date, benefit from product where category= '" + category + "'";
 	
 	// product 테이블의 행 개수를 모두 세는 쿼리
-	String query_total = "select Count(*) as total from product";
+	String query_total = "select Count(*) as total from product where category= '" + category + "'";
 	
 	// 세부 카테코리 값에 따라 쿼리 조건 추가
 	if(detail_category== null || detail_category.equals("전체보기")){
 		query += "";
-		query_total += " where category= '" + category + "'";
+		query_total += "";
 	}else if(detail_category != null){
 		query += " and detail_category= '" + detail_category + "'";
-		query_total += " where detail_category= '" + detail_category + "'";
+		query_total += " and detail_category= '" + detail_category + "'";
 	}
 	
 	// 정렬 값에 따라 쿼리 정렬 추가
