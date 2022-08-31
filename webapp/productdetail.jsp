@@ -202,7 +202,7 @@ $(function(){
 	con1.StartConnection(getServletConfig());
 	listOfProducts = con1.GetAllProduct();
 	con1.CloseConnection();
-	
+	session.setAttribute("code", p_code);
 	
 	%> 
 <div class="container">
@@ -213,7 +213,7 @@ $(function(){
     		<div id = "side_left" ><img src = <%=item.getImage() %> width=400px; height=500px;> </div>
 		
 		<div id = "side_right" align="left" >
-			
+			<input type="hidden" id="code" value=<%=item.getCode() %>>
 			<h3><strong><%=item.getName() %></strong></h3>
 			<p><h3><%=item.getPrice() %>원</h3>
 			<hr size=1px>
@@ -260,10 +260,30 @@ $(function(){
 					price = parseInt(now_price)-parseInt(original_price);
 					priceElement.innerText = price;
 				}
+				
+				function sendCartData(){
+					var code=0;
+					var count=0;
+					var price=0;
+					
+					code=$("#code").html();
+					count=$("#result").html();
+					price=$("#price").html();
+					
+					var allData = {"code":code,"count":count,"price":price};
+					
+					$.ajax({
+						url:"cartproc.jsp",
+						type:"POST",
+						data:allData,
+						datatype:"html"
+					})
+				}
+				
 			</script>
 		
 			<div id = "side_right_box">
-				<button class="btn btn1" id="btn_cart">장바구니 담기</button>
+				<button class="btn btn1" id="btn_cart" onclick="sendCartData()">장바구니 담기</button>
 				<button class="btn btn2" id="btn_order">바로주문</button>
 
 			</div><br>
@@ -362,16 +382,16 @@ function search(){
 	int displayPost = (pageNum -1)*postNum; //테이블에서 읽어 올 행의 위치
 
 	String query = "select @rownum:=@rownum+1 as seq, seqno, mtitle, mwriter, to_char(mregdate,'YYYY-MM-DD HH24:MI:SS') as mregdate," 
-			+ "hitno from (select @rownum:=0) a, mboard b where code =" + p_code;
+			+ "hitno from (select @rownum:=0) a, mboard b where code = " + p_code;
 	
 	if(searchType.equals("mtitle")) 
-		query += "where mtitle like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
+		query += " and mtitle like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
 	else if(searchType.equals("mcontent"))
-		query += "where mcontent like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
+		query += " and mcontent like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
 	else if(searchType.equals("mtitle_mcontent"))
-		query += "where mtitle like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%') or mcontent like concat('%','" + keyword + "','%')"; 
+		query += " and mtitle like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%') or mcontent like concat('%','" + keyword + "','%')"; 
 	else if(searchType.equals("mwriter"))
-		query += "where mwriter like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
+		query += " and mwriter like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
 	query += " order by seqno desc limit "+ displayPost + "," + postNum;
 	
 	
@@ -428,7 +448,7 @@ function search(){
 	
 	try{
 
-		String query_totalCount = "select count(*) as totalCount from mboard where code =" + p_code;
+		String query_totalCount = "select count(*) as totalCount from mboard where code = " + p_code;
 		
 		if(searchType.equals("mtitle")) 
 			query_totalCount += "where mtitle like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
