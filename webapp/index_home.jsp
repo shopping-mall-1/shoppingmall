@@ -85,7 +85,7 @@
 
 </script>
 <body>
-   <div id="container">
+   <div>
       <jsp:include page="header.jsp" />
       <div class="slider">
          <div>
@@ -124,6 +124,6 @@
       </div>
 
 		<jsp:include page="index_home_product.jsp" />
-
+	</div>
 </body>
 </html>
