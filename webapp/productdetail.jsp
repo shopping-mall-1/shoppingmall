@@ -451,13 +451,13 @@ function search(){
 		String query_totalCount = "select count(*) as totalCount from mboard where code = " + p_code;
 		
 		if(searchType.equals("mtitle")) 
-			query_totalCount += "where mtitle like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
+			query_totalCount += " and mtitle like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
 		else if(searchType.equals("mcontent"))
-			query_totalCount += "where mcontent like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
+			query_totalCount += " and mcontent like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
 		else if(searchType.equals("mtitle_mcontent"))
-			query_totalCount += "where mtitle like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%') or mcontent like concat('%','" + keyword + "','%')"; 
+			query_totalCount += " and mtitle like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%') or mcontent like concat('%','" + keyword + "','%')"; 
 		else if(searchType.equals("mwriter"))
-			query_totalCount += "where mwriter like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
+			query_totalCount += " and mwriter like concat('%','" + URLDecoder.decode(keyword,"UTF-8") + "','%')";
 		
 		DataSource ds = (DataSource) this.getServletContext().getAttribute("dataSource");
 		con2 = ds.getConnection();
