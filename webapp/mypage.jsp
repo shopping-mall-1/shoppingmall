@@ -54,16 +54,33 @@ position:relative;
   display:inline;
 
 }
-
-.btn_cancel  {
+.btn_logout  {
   position:relative;
-  left:40%;
+  left:20%;
   transform: translateX(-50%);
   margin-top: 20px;
-  margin-bottom: 20px;
-  width:80%;
+  margin-bottom: 10px;
+  width:40%;
   height:40px;
-  background:#5F0080 ;
+  background: #5F0080;
+  background-position: left;
+  background-size: 200%;
+  color:white;
+  font-weight: bold;
+  border:none;
+  cursor:pointer;
+  transition: 0.4s;
+  display:inline;
+}
+.btn_cancel  {
+  position:relative;
+  left:20%;
+  transform: translateX(-50%);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width:40%;
+  height:40px;
+  background: #CBB0EB;
   background-position: left;
   background-size: 200%;
   color:white;
@@ -87,7 +104,7 @@ position:relative;
     Statement stmt = null;
     ResultSet rs = null;
 
-    // 모든 일반 회원의 데이터를 가져오는 쿼리문
+    // 아이디가 일치하는 회원의 데이터를 가져오는 쿼리문
     String q_getMemberList = "select id, name, password, tel, address, email from member where id='" + id + "'";
  
     try{
@@ -131,6 +148,7 @@ position:relative;
  	<input type="text" id="address" name="address" class="address" readonly placeholder="주소 : <%= one.getAddress()%>">
 </TR>
 		<input type="text" id="email" name="email" class="email" readonly placeholder="이메일 :<%= one.getEmail()%>">
+		<input type="button" id="btn_logout" class="btn_logout" value="로그아웃" onclick="location.href='Account/logout.jsp'">
 		<input type="button" id="btn_cancel" class="btn_cancel" value="뒤로가기" onclick="history.back()">
 	</form>
 
