@@ -34,7 +34,7 @@
 	
 		
 		String query = "insert into member "
-	             + "(id,name,password,tel,address,email) " 
+	             + "(id,name,password,tel,address,email,role) " 
 				 + "values ('" + id + "','" + name  + "','" + password
 				 + "','" + tel + "','" + address + "','" + email + "','none')";
 		
