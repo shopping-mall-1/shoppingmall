@@ -36,7 +36,7 @@
 		String query = "insert into member "
 	             + "(id,name,password,tel,address,email) " 
 				 + "values ('" + id + "','" + name  + "','" + password
-				 + "','" + tel + "','" + address + "','" + email + "')";
+				 + "','" + tel + "','" + address + "','" + email + "','none')";
 		
 		System.out.println(query);
 	
