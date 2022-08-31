@@ -12,16 +12,47 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- 테이블 데이터 webmarket.cart:~4 rows (대략적) 내보내기
+
+-- webmarket 데이터베이스 구조 내보내기
+CREATE DATABASE IF NOT EXISTS `webmarket` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `webmarket`;
+
+-- 테이블 webmarket.cart 구조 내보내기
+CREATE TABLE IF NOT EXISTS `cart` (
+  `customer` varchar(20) NOT NULL,
+  `p_code` int(11) unsigned NOT NULL,
+  `p_count` int(11) unsigned NOT NULL DEFAULT 0,
+  KEY `FK_customer` (`customer`),
+  KEY `FK_pcode` (`p_code`),
+  CONSTRAINT `FK_customer` FOREIGN KEY (`customer`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_pcode` FOREIGN KEY (`p_code`) REFERENCES `product` (`code`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='회원들이 장바구니에 담은 상품이 들어가는 테이블';
+
+-- 테이블 데이터 webmarket.cart:~3 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
 INSERT INTO `cart` (`customer`, `p_code`, `p_count`) VALUES
-	('test', 3, 4),
-	('minjae60', 6, 16),
-	('test', 1, 9),
-	('test', 6, 6);
+	('test', 1, 4),
+	('test', 6, 2),
+	('test', 2, 4);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 
--- 테이블 데이터 webmarket.mboard:~7 rows (대략적) 내보내기
+-- 테이블 webmarket.mboard 구조 내보내기
+CREATE TABLE IF NOT EXISTS `mboard` (
+  `seqno` int(11) NOT NULL AUTO_INCREMENT,
+  `mtitle` varchar(200) NOT NULL,
+  `mwriter` varchar(50) NOT NULL,
+  `mcontent` text NOT NULL,
+  `mregdate` varchar(50) NOT NULL,
+  `hitno` int(11) DEFAULT NULL,
+  `id` varchar(50) DEFAULT NULL,
+  `org_filename` varchar(50) DEFAULT NULL,
+  `stored_filename` varchar(50) DEFAULT NULL,
+  `filesize` int(11) DEFAULT NULL,
+  `code` int(11) DEFAULT NULL,
+  PRIMARY KEY (`seqno`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4;
+
+-- 테이블 데이터 webmarket.mboard:~13 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `mboard` DISABLE KEYS */;
 INSERT INTO `mboard` (`seqno`, `mtitle`, `mwriter`, `mcontent`, `mregdate`, `hitno`, `id`, `org_filename`, `stored_filename`, `filesize`, `code`) VALUES
 	(45, '야호', '밍쟈이', '성공이다 시바라랃잗자ㅣㄹㄷㅈ', '2022-08-30T19:16:50.516137300', NULL, 'minjae60', 'null', '', 0, 2),
@@ -30,17 +61,54 @@ INSERT INTO `mboard` (`seqno`, `mtitle`, `mwriter`, `mcontent`, `mregdate`, `hit
 	(49, 'ㅈㄹㅈㅈ', '밍쟈이', 'ㄹㄹㅈㅈㄹ', '2022-08-30T19:18:32.023974600', NULL, 'minjae60', 'null', '', 0, 2),
 	(50, 'ㅈㄹㅈㄹㅈㄹ', '밍쟈이', 'ㅈㄹㅈㄹㅈㄹㅈ', '2022-08-30T19:18:35.879170400', NULL, 'minjae60', 'null', '', 0, 2),
 	(52, 'ㄹㄹ', '밍쟈이', 'ㄹㄹ', '2022-08-30T19:32:38.749692500', NULL, 'minjae60', 'null', '', 0, 2),
-	(54, '복숭아', '테스트계정', '어때요', '2022-08-31T14:20:32.751230300', NULL, 'test', 'null', '', 0, 1);
+	(54, '복숭아', '테스트계정', '어때요', '2022-08-31T14:20:32.751230300', NULL, 'test', 'null', '', 0, 1),
+	(55, '배송', '밍쟈이', '배송 언제와요', '2022-08-31T15:24:28.319218200', NULL, 'minjae60', 'null', '', 0, 6),
+	(56, '무화과', '밍쟈이', '마싯어요?', '2022-08-31T15:24:34.949880200', NULL, 'minjae60', 'null', '', 0, 6),
+	(57, '언제와', '밍쟈이', '언제오냐고', '2022-08-31T15:24:42.021214', NULL, 'minjae60', 'null', '', 0, 6),
+	(58, '주문', '밍쟈이', '성공', '2022-08-31T15:24:49.044192800', NULL, 'minjae60', 'null', '', 0, 6),
+	(59, '40분', '밍쟈이', '남앗어 빨리빨리', '2022-08-31T15:24:56.771064800', NULL, 'minjae60', 'null', '', 0, 6),
+	(60, '제발', '밍쟈이', '제발 ㅠㅠ', '2022-08-31T15:25:02.404739800', NULL, 'minjae60', 'null', '', 0, 6);
 /*!40000 ALTER TABLE `mboard` ENABLE KEYS */;
 
--- 테이블 데이터 webmarket.member:~3 rows (대략적) 내보내기
+-- 테이블 webmarket.member 구조 내보내기
+CREATE TABLE IF NOT EXISTS `member` (
+  `id` varchar(20) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL DEFAULT '',
+  `tel` varchar(20) NOT NULL DEFAULT '',
+  `address` varchar(50) NOT NULL DEFAULT '',
+  `email` varchar(50) NOT NULL DEFAULT '',
+  `lastpwdate` timestamp NULL DEFAULT NULL,
+  `pwcheck` int(11) DEFAULT NULL,
+  `role` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='회원의 정보가 들어가는 테이블';
+
+-- 테이블 데이터 webmarket.member:~4 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
 INSERT INTO `member` (`id`, `name`, `password`, `tel`, `address`, `email`, `lastpwdate`, `pwcheck`, `role`) VALUES
 	('guest00a', '게스트계정', '1234', '01022334455', '서울시 마이구 에스큐엘동 돌고래빌라 202호', 'guest@email.com', NULL, NULL, 'none'),
 	('kim00a', '김영아', '1234', '01033445566', '서울시 어쩌고구 저쩌고동 블라빌라 303호', 'kim00a@email.com', NULL, NULL, 'none'),
 	('minjae60', '밍쟈이', 'rkdud123!', '01026758245', '서울 영등포구 버드나루로 74 (영등포동7가) 403', 'minjae60@gmail.com', NULL, NULL, 'admin'),
-	('test', '테스트계정', 'rkdud135!', '01012341234', '서울시 마리아구 물개동 데이터베이스빌라 101호', 'test@email.com', '2022-08-31 14:41:29', 1, 'none');
+	('test', '테스트계정', '1234', '01012341234', '서울시 마리아구 물개동 데이터베이스빌라 101호', 'test@email.com', '2022-08-31 16:24:22', 1, 'none');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
+
+-- 테이블 webmarket.product 구조 내보내기
+CREATE TABLE IF NOT EXISTS `product` (
+  `code` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `company` varchar(50) NOT NULL,
+  `price` int(11) NOT NULL DEFAULT 0,
+  `stock` int(11) DEFAULT 0,
+  `description` text DEFAULT NULL,
+  `image` varchar(50) DEFAULT '',
+  `category` varchar(50) DEFAULT NULL,
+  `regist_date` date DEFAULT date_format(current_timestamp(),'%Y-%m-%d'),
+  `detail_category` varchar(50) DEFAULT NULL,
+  `benefit` float DEFAULT 0,
+  `recommend` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COMMENT='각 상품의 정보가 들어가는 테이블';
 
 -- 테이블 데이터 webmarket.product:~21 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
@@ -68,7 +136,18 @@ INSERT INTO `product` (`code`, `name`, `company`, `price`, `stock`, `description
 	(21, '아삭한 햇 홍로 사과 1.5kg (6~7입)', '사과팡', 12900, 500, NULL, 'images/apple2.png', '과일·견과·쌀', '2022-08-31', '국산', 0, '놓치면후회');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
--- 테이블 데이터 webmarket.reply:~6 rows (대략적) 내보내기
+-- 테이블 webmarket.reply 구조 내보내기
+CREATE TABLE IF NOT EXISTS `reply` (
+  `replyseqno` int(11) NOT NULL AUTO_INCREMENT,
+  `seqno` int(11) NOT NULL DEFAULT 0,
+  `replywriter` varchar(200) NOT NULL DEFAULT '0',
+  `replycontent` text NOT NULL,
+  `replyregdate` varchar(50) DEFAULT '',
+  `id` varchar(50) DEFAULT '',
+  PRIMARY KEY (`replyseqno`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+
+-- 테이블 데이터 webmarket.reply:~8 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `reply` DISABLE KEYS */;
 INSERT INTO `reply` (`replyseqno`, `seqno`, `replywriter`, `replycontent`, `replyregdate`, `id`) VALUES
 	(6, 29, '밍쟈이', '헤이이이이 호우우', '2022-08-30T17:38:07.763563100', 'minjae60'),
@@ -76,8 +155,26 @@ INSERT INTO `reply` (`replyseqno`, `seqno`, `replywriter`, `replycontent`, `repl
 	(8, 42, '밍쟈이', '안녕\r\n', '2022-08-30T19:06:53.574997100', 'minjae60'),
 	(9, 42, '밍쟈이', '개빡치네', '2022-08-30T19:10:55.349868500', 'minjae60'),
 	(10, 43, '밍쟈이', '제발 ㅠㅜ', '2022-08-30T19:13:10.316511100', 'minjae60'),
-	(11, 45, '밍쟈이', '집에 가보자고~~', '2022-08-30T19:36:10.224384700', 'minjae60');
+	(11, 45, '밍쟈이', '집에 가보자고~~', '2022-08-30T19:36:10.224384700', 'minjae60'),
+	(12, 60, '밍쟈이', '제발요 ㅠㅠ', '2022-08-31T16:01:05.386922500', 'minjae60'),
+	(13, 54, '테스트계정', '맛잇대요', '2022-08-31T16:31:18.460299', 'test');
 /*!40000 ALTER TABLE `reply` ENABLE KEYS */;
+
+-- 테이블 webmarket.tbl_order 구조 내보내기
+CREATE TABLE IF NOT EXISTS `tbl_order` (
+  `code` int(11) unsigned NOT NULL,
+  `customer` varchar(20) NOT NULL,
+  `p_code` int(11) unsigned NOT NULL,
+  `p_count` int(11) unsigned NOT NULL DEFAULT 0,
+  `state` varchar(10) NOT NULL DEFAULT '0',
+  `date` varchar(20) NOT NULL DEFAULT '0',
+  `address` varchar(50) NOT NULL,
+  PRIMARY KEY (`code`),
+  KEY `FK_order_member` (`customer`),
+  KEY `FK_order_product` (`p_code`),
+  CONSTRAINT `FK_order_member` FOREIGN KEY (`customer`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_order_product` FOREIGN KEY (`p_code`) REFERENCES `product` (`code`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='회원들이 주문한 결제 내역이 들어가는 테이블';
 
 -- 테이블 데이터 webmarket.tbl_order:~2 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `tbl_order` DISABLE KEYS */;
