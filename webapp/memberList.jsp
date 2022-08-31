@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/adminList.css">
 <title>회원 정보 관리</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <jsp:include page="header.jsp" />
@@ -55,16 +56,16 @@
         if(con != null) con.close();
     }
 %>
-<table border="1">
+<table>
     <caption>회원 목록</caption>
     <thead>
     <tr align="center">
-        <td>아이디</td>
-        <td>이름</td>
-        <td>비밀번호</td>
-        <td>전화번호</td>
-        <td>배송지</td>
-        <td>이메일</td>
+        <th>아이디</th>
+        <th>이름</th>
+        <th>비밀번호</th>
+        <th>전화번호</th>
+        <th>배송지</th>
+        <th>이메일</th>
     </tr>
     </thead>
     <tbody>

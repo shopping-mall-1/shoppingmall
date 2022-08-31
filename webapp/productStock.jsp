@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/adminList.css">
 <title>상품 재고 관리</title>
 <jsp:include page="header.jsp" />
 </head>
@@ -53,31 +54,26 @@
 %>
 
 
-<table border="1">
+<table>
     <caption>상품 재고 관리</caption>
     <thead>
     <tr align="center">
-        <td>코드</td>
-        <td>이름</td>
-        <td>가격</td>
-        <td>재고</td>
+        <th>코드</th>
+        <th>이름</th>
+        <th>가격</th>
+        <th>재고</th>
     </tr>
     </thead>
     <tbody>
 <%	for(int i = 0; i < stockList.size(); i++) {
 		ProductStock one = stockList.get(i);
-		if(one.getStock() <= 0) {
-%>
-    	<tr style="font-weight:bold; color:red;">
-<%		} else if(one.getStock() < 5) { %>
-		<tr style="font-weight:bold; color:brown;">
-<% 		} else { %>
-		<tr>
+		if(one.getStock() <= 200) { %>
+    	<tr style="color: red;">
 <%		} %>
 	        <td><%=one.getCode() %></td>
 	        <td><%=one.getName() %></td>
-	        <td align="right"><%=one.getPrice() %>원</td>
-			<td align="right"><%=one.getStock() %></td>
+	        <td><%=one.getPrice() %>원</td>
+			<td><%=one.getStock() %></td>
 	    </tr>
 <%
 	}
