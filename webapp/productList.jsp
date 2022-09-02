@@ -131,7 +131,7 @@ a:hover{
 	//String path = "\"/img/" + category + ".jpg\"";
 	//이미지 경로 String으로 만들어주기
 	//String path = "C:\\eclipse_work\\Shop\\src\\main\\webapp\\img\\" + category + ".jpg";
-	String path = "C:\\eclipse_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp7\\wtpwebapps\\Shop\\img\\banner_img\\" + category + ".jpg";
+	String path = "C:\\eclipse_workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\ShoppingMall\\images\\banner_img\\" + category + ".jpg";
 	File img = new File(path);
 	
 	System.out.println(path);
@@ -140,11 +140,11 @@ a:hover{
 	//배너 이미지가 존재하면
 	if(img.exists()){
 %>
-		<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>"> <img src = "/img/banner_img/<%=category %>.jpg"></a>
+		<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>"> <img src = "images/banner_img/<%=category %>.jpg"></a>
 <%
 	}else{ //배너이미지가 존재하지 않으면 이벤트 배너 띄우기
 %>
-		<a href="eventNow.jsp?category=추석"> <img src = "/img/banner_img/이벤트.jpg"></a>
+		<a href="eventNow.jsp?category=추석"> <img src = "images/banner_img/이벤트.jpg"></a>
 <% } %>		
 		</div>
 	</div>
@@ -288,9 +288,9 @@ a:hover{
 				
 	%>
 			<div class="col-lg-4 col-md-6">
-				<a id="choose" href="product.jsp?code=<%=rs.getInt("code") %>">
+				<a id="choose" href="productdetail.jsp?code=<%=rs.getInt("code") %>&page=1">
 				<section>
-					<img src="./img/product_img/<%=rs.getString("image") %>" class="img_size">
+					<img src="<%=rs.getString("image") %>" class="img_size">
 					<br><br>
 					<h4 class="product"><%=rs.getString("name") %></h4>
 					
@@ -299,7 +299,7 @@ a:hover{
 		%>			
 		
 					<h5 class="product"><b><%=formatter.format(dis_price) %> 원</b></h5>
-					<p class="product" style="color:#7A7883"><%=rs.getString("description") %></p>
+					<%-- <p class="product" style="color:#7A7883"><%=rs.getString("description") %></p> --%>
 					<br>
 				</section>
 				</a>
@@ -309,7 +309,7 @@ a:hover{
 		%>
 					<h5 class="product"><b><span style="color:orange"><%=discount %>% &nbsp;</span><%=formatter.format(dis_price) %> 원</b></h5>
 					<p class="product" style="color:#7A7883; text-decoration:line-through"><%=formatter.format(price) %>원</p>
-					<p class="product" style="color:#7A7883"><%=rs.getString("description") %></p>
+					<%-- <p class="product" style="color:#7A7883"><%=rs.getString("description") %></p> --%>
 					<br>
 				</section>
 				</a>

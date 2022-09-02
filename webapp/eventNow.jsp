@@ -103,7 +103,7 @@ a:hover{
 
 %> 
 <div align="center">
-	<img src="./img/추석.png">
+	<img src="images/추석.png">
 </div>
 
 

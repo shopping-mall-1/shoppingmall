@@ -82,6 +82,13 @@ a:hover{
 	height:400px;
 }
 
+.nofind{
+	font-size:13px;
+	align-items:center;
+	color:gray;
+	
+}
+
 </style>
 
 </head>
@@ -97,37 +104,16 @@ a:hover{
 
 <%
 	request.setCharacterEncoding("utf-8");
-	String menu = request.getParameter("menu");
+	String findKeyword = request.getParameter("findKeyword");
 	String sort = request.getParameter("sort");
 	
-	String query = "";
-	String query_total = "";
+	String query = "SELECT code, name, price, stock, description, image, category as tbl_category, detail_category as tbl_detail, regist_date, benefit" 
+			 +" from product where name like '" + "%" + findKeyword + "%" + "'";
+
+	String query_total = "SELECT COUNT(*) as total from product where name like '" + "%" + findKeyword + "%" + "'";
 	
-	if(menu.equals("신상품")){
-		//상품등록일자가 30일 이내인 상품정보만 가져오는 쿼리
-		query = "SELECT code, name, price, stock, description, image, category as tbl_category, detail_category as tbl_detail, regist_date, benefit" 
-				 +" from product where DATEDIFF(NOW(), regist_date) < 31";
-		// 상품등록일자가 30일 이내인 행의 개수를 세는 쿼리
-		query_total = "SELECT COUNT(*) as total from product where DATEDIFF(NOW(), regist_date) < 31";
-		
-	}else if(menu.equals("베스트")){
-		// 주문 테이블에서 상품이름이 10개 이상 반복되는 상품 정보를 가져오는 쿼리
-		query = "SELECT distinct P.code, P.name, P.price, P.description, P.image, P.category as tbl_category, P.detail_category as tbl_detail, P.regist_date, P.benefit from product P" 
-				+" JOIN tbl_order T ON P.code = T.p_code WHERE (SELECT COUNT(T.p_code) AS p_count FROM tbl_order GROUP BY T.p_code) > 10";
-		// 주문 테이블에서 상품이름이 10개 이상 반복되는 상품 행의 개수를 세는 쿼리
-		query_total = "SELECT COUNT(distinct P.code) AS total from product P" 
-				+" JOIN tbl_order T ON P.code = T.p_code WHERE (SELECT COUNT(T.p_code) AS p_count FROM tbl_order GROUP BY T.p_code) > 10";
-				
-	}else if(menu.equals("알뜰쇼핑")){
-		// 할인이 0 이상인 상품 정보만 가져오는 쿼리
-		query = "SELECT code, name, price, stock, description, image, category as tbl_category, detail_category as tbl_detail, regist_date, benefit FROM product WHERE benefit >0";
-		// 할인이 0 이상인 행의 개수를 세는 쿼리
-		query_total = "SELECT COUNT(*) as total FROM product WHERE benefit >0";
-		
-	}else if(menu.equals("특가/혜택")){
-		response.sendRedirect("eventList.jsp");
-	}
-	
+	System.out.println("query");
+
 	// 정렬 값에 따라 쿼리 정렬 추가
 	if(sort != null){
 		if(sort.equals("낮은가격"))
@@ -207,20 +193,30 @@ a:hover{
 <!-- 배너광고 끝 -->
 
 <!-- 카테코리 -->
-<h3 align="center"><b> <%=menu %></b></h3><br>
+<h3 align="center"><b> '<span style="color:purple"><%=findKeyword %></span>'에 대한 검색 결과</b></h3><br>
 
+<%
+	if(Integer.parseInt(total) == 0){
+%>
+	<br><br>
+	<div align="center">
+		<h4 class="nofind">검색된 상품이 없습니다.</h4>
+	</div>
+<%	}else {
+
+%>
 <!-- 정렬 조건 메뉴  -->
 <div class="sort_box row">
 	<div class="col" align="left">
 		총 <%=total %>건
 	</div>
 	<div class="col" align="right">
-		<a href="productAll.jsp?menu=<%=menu %>&sort=추천순">추천순</a> | 
-		<a href="productAll.jsp?menu=<%=menu %>&sort=신상품순">신상품순</a> | 
-		<a href="productAll.jsp?menu=<%=menu %>&sort=판매량순">판매량순</a> | 
-		<a href="productAll.jsp?menu=<%=menu %>&sort=혜택순">혜택순</a> | 
-		<a href="productAll.jsp?menu=<%=menu %>&sort=낮은가격">낮은 가격순</a> | 
-		<a href="productAll.jsp?menu=<%=menu %>&sort=높은가격">높은 가격순</a>
+		<a href="productAll.jsp?findKeyword=<%=findKeyword %>&sort=추천순">추천순</a> | 
+		<a href="productAll.jsp?findKeyword=<%=findKeyword %>&sort=신상품순">신상품순</a> | 
+		<a href="productAll.jsp?findKeyword=<%=findKeyword %>&sort=판매량순">판매량순</a> | 
+		<a href="productAll.jsp?findKeyword=<%=findKeyword %>&sort=혜택순">혜택순</a> | 
+		<a href="productAll.jsp?findKeyword=<%=findKeyword %>&sort=낮은가격">낮은 가격순</a> | 
+		<a href="productAll.jsp?findKeyword=<%=findKeyword %>&sort=높은가격">높은 가격순</a>
 	</div>
 </div>
 
@@ -261,7 +257,7 @@ a:hover{
 			%>
 						<h5 class="product"><b><span style="color:orange"><%=discount %>% &nbsp;</span><%=formatter.format(dis_price) %> 원</b></h5>
 						<p class="product" style="color:#7A7883; text-decoration:line-through"><%=formatter.format(price) %>원</p>
-						<p class="product" style="color:#7A7883"><%=rs.getString("description") %></p>
+						<%-- <p class="product" style="color:#7A7883"><%=rs.getString("description") %></p> --%>
 						<br>
 					</section>
 					</a>
@@ -283,7 +279,9 @@ a:hover{
 		</div>
 		<hr>
 	</div>
-
+<%
+	}
+%>
 	
 </body>
 

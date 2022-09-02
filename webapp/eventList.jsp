@@ -55,14 +55,14 @@ a:hover{
 <div class="container" align="center">
 	<div class="row">
 		<div class="col">
-			<a href="eventNow.jsp"> <img src = "./img/banner_img/이벤트.jpg" class="banner_size"></a>
+			<a href="eventNow.jsp"> <img src = "images/banner_img/이벤트.jpg" class="banner_size"></a>
 		</div>
 	</div>
 </div>
 
 <%
 	//String path = "C:\\eclipse_work\\Shop\\src\\main\\webapp\\img\\";
-	String path = "C:\\eclipse_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp7\\wtpwebapps\\Shop\\img\\banner_img\\";
+	String path = "C:\\eclipse_workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\ShoppingMall\\images\\banner_img\\";
 	File folder = new File(path);
 	File[] fList = folder.listFiles();
 	String categoryNum = "";
@@ -106,7 +106,7 @@ a:hover{
 	<div class="container" align="center">
 		<div class="row">
 			<div class="col">
-				<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>"> <img src="./img/banner_img/<%=fileName %>" class="banner_size" ></a>
+				<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>"> <img src="./images/banner_img/<%=fileName %>" class="banner_size" ></a>
 			</div>
 		</div>
 	</div>

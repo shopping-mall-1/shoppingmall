@@ -33,6 +33,29 @@ $(document).ready(function(){
 	$('.slider').bxSlider({pager:true, auto:true}); //슬라이더
 });
 
+//특수문자 입력 방지
+function characterCheck(obj){
+var regExp = /[\{\}\[\]\/|\`!^\-_+┼\\'\"\\\(\=]/gi; 
+//허용할 특수문자는 여기서 삭제
+if( regExp.test(obj.value) ){
+	alert("특수문자는 입력하실수 없습니다.");
+	obj.value = obj.value.substring( 0 , obj.value.length - 1 ); // 입력한 특수문자 한자리 지움
+	}
+}
+
+function findProduct(){
+	
+	var findKeyword =  $("#findKeyword").val();
+	location.href = 'searchProduct.jsp?page=1&findKeyword=' + findKeyword;
+}
+
+function press(){
+	
+	if(event.keyCode == 13){findProduct();}
+	
+}
+
+
 </script>
 <body>
 
@@ -66,8 +89,10 @@ $(document).ready(function(){
 			<a href="index.jsp" style='margin:10px; padding:0'><img src='css/logo.svg' style='margin:10px; padding:0'></a>
 			<span style='color:rgb(95, 0, 128); margin:0px;'>마켓컬리</span>
 		  	<div class="search">
-  				<input type="text" placeholder="검색어 입력">
-  				<img id="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+  				<input type="text" id="findKeyword" name="findKeyword" placeholder="검색어를 입력해주세요" onkeydown="press()" onkeyup="characterCheck(this)">
+  				<button type="button" class="searchbutton" onclick="findProduct()">
+  					<img id="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+  				</button>
 			</div>
 			<div class="menu_personal">
 				<a href="#"><img src="css/gps.png" width="30px" height="30px"></a> <!-- 각 기능이 있는 파일 링크 걸기 -->
