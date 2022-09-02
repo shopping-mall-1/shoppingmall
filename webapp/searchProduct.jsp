@@ -211,12 +211,12 @@ a:hover{
 		총 <%=total %>건
 	</div>
 	<div class="col" align="right">
-		<a href="productAll.jsp?findKeyword=<%=findKeyword %>&sort=추천순">추천순</a> | 
-		<a href="productAll.jsp?findKeyword=<%=findKeyword %>&sort=신상품순">신상품순</a> | 
-		<a href="productAll.jsp?findKeyword=<%=findKeyword %>&sort=판매량순">판매량순</a> | 
-		<a href="productAll.jsp?findKeyword=<%=findKeyword %>&sort=혜택순">혜택순</a> | 
-		<a href="productAll.jsp?findKeyword=<%=findKeyword %>&sort=낮은가격">낮은 가격순</a> | 
-		<a href="productAll.jsp?findKeyword=<%=findKeyword %>&sort=높은가격">높은 가격순</a>
+		<a href="searchProduct.jsp?findKeyword=<%=findKeyword %>&sort=추천순">추천순</a> | 
+		<a href="searchProduct.jsp?findKeyword=<%=findKeyword %>&sort=신상품순">신상품순</a> | 
+		<a href="searchProduct.jsp?findKeyword=<%=findKeyword %>&sort=판매량순">판매량순</a> | 
+		<a href="searchProduct.jsp?findKeyword=<%=findKeyword %>&sort=혜택순">혜택순</a> | 
+		<a href="searchProduct.jsp?findKeyword=<%=findKeyword %>&sort=낮은가격">낮은 가격순</a> | 
+		<a href="searchProduct.jsp?findKeyword=<%=findKeyword %>&sort=높은가격">높은 가격순</a>
 	</div>
 </div>
 
