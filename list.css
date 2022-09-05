@@ -1,0 +1,63 @@
+
+a:link { color: black; }
+a:visited { color: black; }
+a:hover { color: red; }
+a:active { color: red; }
+#hypertext { text-decoration-line: none; cursor: hand; }
+
+.tableDiv {
+	text-align: center;
+}
+
+.InfoTable {
+      border-collapse: collapse;
+      border-top: 2px solid #400080;
+      width: 800px;  
+      margin-left: auto; 
+      margin-right: auto;
+    }  
+    
+    .InfoTable th {
+      color: white;
+      background-color: rgb(95, 0, 128);
+      text-align: center;
+    }
+    
+    .InfoTable th, .InfoTable td {
+      padding: 10px;
+    }
+    .InfoTable th:first-child, .InfoTable td:first-child {
+      border-left: none;
+    }
+    .InfoTable th:last-child, .InfoTable td:last-child {
+      border-right: none;
+    }
+    .InfoTable tr td:first-child{
+      text-align: center;
+    }
+    .InfoTable caption{caption-side: top; }
+
+.bottom_menu { margin-top: 20px; }
+
+.bottom_menu > a:link, .bottom_menu > a:visited {
+	background-color: rgb(95, 0, 128);
+	padding: 15px 30px;
+	margin: 2px;
+	border: none;
+	color: black;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	color: white;
+	font-weight: bold;
+	display: inline-block;
+	cursor: pointer;
+	-webkit-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+	width: 180px;
+	height: 50px;
+}
+.bottom_menu > a:hover, .bottom_menu > a:active { 
+	background-color: gray;
+	text-decoration : none; 
+}
