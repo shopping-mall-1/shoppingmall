@@ -149,11 +149,11 @@ a:hover{
 <%
 	if(category.equals("과일·견과·쌀") || category.equals("국·반찬·메인요리") || category.equals("샐러드·간편식") || category.equals("생수·음료·우유·커피") || category.equals("수산·해산·건어물") || category.equals("정육·계란") || category.equals("채소")){
 %>
-		<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>"> <img src = "images/banner_img/<%=category %>.jpg"></a>
+		<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>"> <img src = "images/<%=category %>.jpg"></a>
 <%
 	}else{ //배너이미지가 존재하지 않으면 이벤트 배너 띄우기
 %>
-		<a href="eventNow.jsp?category=추석"> <img src = "images/banner_img/이벤트.jpg"></a>
+		<a href="eventNow.jsp?category=추석"> <img src = "images/이벤트.jpg"></a>
 <% } %>
 
 		</div>

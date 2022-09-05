@@ -111,7 +111,7 @@ a:active { color: red; }
 
 <%
 	String id = (String)session.getAttribute("id");
-	if(id == null) response.sendRedirect("Account/login.jsp");
+	if(id == null) response.sendRedirect("login.jsp");
 	//int code = Integer.parseInt(request.getParameter("code"));
 	
 	String name = "";

@@ -89,9 +89,12 @@ text-align: center;
 <!-- 세션, 파리미터값 가져 오기 -->
 <%
 	
-	String session_id = (String)session.getAttribute("id");
+	String session_id = session.getAttribute("id") == null?"no_id":(String)session.getAttribute("id");
 	String session_name = (String)session.getAttribute("name");
-	if(session_id == null) response.sendRedirect("Account/login.jsp");
+	System.out.println("id : "+session_id);
+	
+	if(session_id.equals("no_id")) response.sendRedirect("login.jsp");
+	
 	request.setCharacterEncoding("utf-8");
 	String seqno = request.getParameter("seqno");
 	String pageNum = request.getParameter("page");
@@ -375,11 +378,12 @@ function replyCancel() {
 	}
 
 	//조회수 증가
+	//if(session_id==null) response.sendRedirect("Account/login.jsp");
 	if(!session_id.equals(db_id)) {
 		hitno++;
 		String query = "update mboard set hitno = " + hitno + " where seqno=" + seqno;
 		System.out.println("[조회수 증가 쿼리] : " + query);
-
+	
 		try{
 			Connection con = null;
 			Statement stmt = null;
@@ -393,7 +397,8 @@ function replyCancel() {
 			if(con != null) con.close();
 			
 		}catch(Exception e){ e.printStackTrace(); }
-	}	
+	
+	}
 %>
 
 <div class="main" align="center">
@@ -415,7 +420,7 @@ function replyCancel() {
 
 	<div class="bottom_menu">
 		<% if(pre_seqno !=0){ %>
-				&nbsp;&nbsp;<a href="view.jsp?code=<%=code %>&seqno=<%=pre_seqno %>&page=<%=pageNum %>&searchType=<%=searchType %>&keyword=<%=keyword %> onMouseover="this.style.textDecoration='underline';" 
+				&nbsp;&nbsp;<a href="view.jsp?code=<%=code %>&seqno=<%=pre_seqno %>&page=<%=pageNum %>&searchType=<%=searchType %>&keyword=<%=keyword %>" onMouseover="this.style.textDecoration='underline';" 
 					onmouseout="this.style.textDecoration='none';">이전글 ▼</a> &nbsp;&nbsp;
 		<% } %>		
 			<a href="productdetail.jsp?code=<%=code %>&page=<%=pageNum %>&searchType=<%=searchType %>&keyword=<%=keyword %>" onMouseover="this.style.textDecoration='underline';" 

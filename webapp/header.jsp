@@ -64,13 +64,13 @@ function press(){
 	<div id="wrap">
 	<div id="user_menu">
 		<ul id="user_menu">
-			<li style="margin:10px; "><a href="Account/signup.jsp">회원가입</a></li>  <!-- 각 기능이 있는 파일 링크 걸기 -->
+			<li style="margin:10px; "><a href="signup.jsp">회원가입</a></li>  <!-- 각 기능이 있는 파일 링크 걸기 -->
 			<%
 				String username = (String)session.getAttribute("name");
 				String role = (String)session.getAttribute("role");
 				if(username == null) {
 			%>
-			<li style="margin:10px;"><a href="Account/login.jsp"> 로그인</a>  </li>
+			<li style="margin:10px;"><a href="login.jsp"> 로그인</a>  </li>
 			<% }
 				else {
 					System.out.println("헤더: " + role);
@@ -90,13 +90,13 @@ function press(){
 			<span style='color:rgb(95, 0, 128); margin:0px;'>마켓컬리</span>
 		  	<div class="search">
   				<input type="text" id="findKeyword" name="findKeyword" placeholder="검색어를 입력해주세요" onkeydown="press()" onkeyup="characterCheck(this)">
-  				<button type="button" class="searchbutton" onclick="findProduct()">
-  					<img id="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-  				</button>
+  				<img id="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" onclick="findProduct()">
 			</div>
 			<div class="menu_personal">
 				<a href="#"><img src="css/gps.png" width="30px" height="30px"></a> <!-- 각 기능이 있는 파일 링크 걸기 -->
-				<a href="#"><img src="css/cart.png" width="30px" height="30px"></a>
+				<a href="cartlist.jsp"><img src="css/cart.png" width="30px" height="30px"></a>
+				<a href="orderlist.jsp"><img src="images/list.png" width="30px" height="30px"></a>
+				
 			</div>
 			
 		</header>
@@ -240,3 +240,5 @@ function press(){
 		</div>
 		</div>
 		<hr>
+		</body>
+		</html>

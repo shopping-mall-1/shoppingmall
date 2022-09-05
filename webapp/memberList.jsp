@@ -18,7 +18,7 @@
 <%
 	// 관리자 계정이 아닌 경우 첫 페이지로 돌아감.
 	String role = (String)session.getAttribute("role");
-	if(role.equals("admin") == false) response.sendRedirect("index_home.jsp");
+	if(role.equals("admin") == false) response.sendRedirect("index.jsp");
 
     request.setCharacterEncoding("UTF-8");
 

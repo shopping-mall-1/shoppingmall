@@ -14,13 +14,15 @@ public class ApplicationConfig implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent sce) {
 		HikariConfig hikariConfig = new HikariConfig();
 		hikariConfig.setDriverClassName("org.mariadb.jdbc.Driver");
-		hikariConfig.setJdbcUrl("jdbc:mariadb://127.0.0.1:3306/webmarket");
-		hikariConfig.setUsername("root");
+		hikariConfig.setJdbcUrl("jdbc:mariadb://10.10.14.27:3306/fakekurly");
+		hikariConfig.setUsername("fakekurly");
+		//hikariConfig.setJdbcUrl("jdbc:mariadb://127.0.0.1:3306/webmarket");
+		//hikariConfig.setUsername("root");
 		hikariConfig.setPassword("1234");
 		
 		// 이후 추가옵션
 		hikariConfig.setConnectionTestQuery("select now() from dual");
-		hikariConfig.setMaximumPoolSize(20);
+		hikariConfig.setMaximumPoolSize(1000);
 		hikariConfig.setMinimumIdle(20);
 		hikariConfig.setPoolName("Mariadb-HikariCP");
 

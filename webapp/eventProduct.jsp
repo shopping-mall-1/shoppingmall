@@ -257,7 +257,7 @@ a:hover{
 				
 	%>
 			<div class="col-lg-4 col-md-6">
-				<a id="choose" href="product.jsp?code=<%=rs.getInt("code") %>">
+				<a id="choose" href="productdetail.jsp?code=<%=rs.getInt("code") %>&page=1">
 				<section>
 					<img src="./<%=rs.getString("image") %>" class="img_size">
 					<br><br>
@@ -268,7 +268,6 @@ a:hover{
 		%>			
 		
 					<h5 class="product"><b><%=formatter.format(dis_price) %> 원</b></h5>
-					<p class="product" style="color:#7A7883"><%=rs.getString("description") %></p>
 					<br>
 				</section>
 				</a>
@@ -278,7 +277,6 @@ a:hover{
 		%>
 					<h5 class="product"><b><span style="color:orange"><%=discount %>% &nbsp;</span><%=formatter.format(dis_price) %> 원</b></h5>
 					<p class="product" style="color:#7A7883; text-decoration:line-through"><%=formatter.format(price) %>원</p>
-					<p class="product" style="color:#7A7883"><%=rs.getString("description") %></p>
 					<br>
 				</section>
 				</a>

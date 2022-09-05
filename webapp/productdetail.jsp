@@ -1,6 +1,6 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.sql.*"%>
-<%@page import="com.jsp.util.Page"%>
+<%@page import="com.market.Page"%>
 <%@page import="java.net.URLDecoder"%>
 <%@page import="javax.sql.DataSource"%>
 <%@page import="com.market.Product"%>

@@ -140,7 +140,7 @@ position:relative;
     <form name="registerForm" id="registerFosssrm" method="post"> 
         <input type="text" id="id" name="id" class="id" readonly placeholder="아이디 : <%= one.getId()%>">
 	    <input type="text" id="name" name="name" class="name" readonly placeholder="이름 : <%= one.getName()%>">
-        <input type="button" id="passwd" name="passwd" class="passwd" value="비밀번호를 변경하시려면 눌러주세요"  onclick="location.href='Account/memberInfoPasswordModifyView.jsp'">
+        <input type="button" id="passwd" name="passwd" class="passwd" value="비밀번호를 변경하시려면 눌러주세요"  onclick="location.href='memberInfoPasswordModifyView.jsp'">
         <input type="text" id="tel" name="tel" class="tel" readonly placeholder="전화번호 : <%= one.getTel().replaceAll(tel_format, "$1-$2-$3")%>">
   <TH> </TH>
 </TR>
@@ -148,7 +148,7 @@ position:relative;
  	<input type="text" id="address" name="address" class="address" readonly placeholder="주소 : <%= one.getAddress()%>">
 </TR>
 		<input type="text" id="email" name="email" class="email" readonly placeholder="이메일 :<%= one.getEmail()%>">
-		<input type="button" id="btn_logout" class="btn_logout" value="로그아웃" onclick="location.href='Account/logout.jsp'">
+		<input type="button" id="btn_logout" class="btn_logout" value="로그아웃" onclick="location.href='logout.jsp'">
 		<input type="button" id="btn_cancel" class="btn_cancel" value="뒤로가기" onclick="history.back()">
 	</form>
 
