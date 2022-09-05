@@ -193,7 +193,7 @@ h1 { font-family: "HY견고딕" }
         <input type="password" id="passwd" name="password" class="passwd" placeholder="비밀번호를 입력해주세요">
         <p style="color:#5F0080;text-align:center;">※ 8~20이내의 영문자, 숫자, 특수문자 조합으로 암호를 만들어 주세요.</p>
         <input type="password" id="passwd1" name="passwd1" class="passwd1" placeholder="비밀번호를 한번 더 입력해주세요">
-        <input type="text" id="tel" name="tel" class="tel" placeholder="숫자만 입력해주세요">
+        <input type="text" id="tel" name="tel" class="tel" placeholder="전화번호를 숫자만 입력해주세요">
         
 
   <TH> </TH>
