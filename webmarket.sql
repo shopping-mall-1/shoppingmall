@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `regist_date` date DEFAULT date_format(current_timestamp(),'%Y-%m-%d'),
   `detail_category` varchar(50) DEFAULT NULL,
   `benefit` float DEFAULT 0,
+  `this_week` varchar(5) DEFAULT NULL,
   `recommend` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COMMENT='각 상품의 정보가 들어가는 테이블';

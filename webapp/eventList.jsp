@@ -55,12 +55,102 @@ a:hover{
 <div class="container" align="center">
 	<div class="row">
 		<div class="col">
-			<a href="eventNow.jsp"> <img src = "images/banner_img/이벤트.jpg" class="banner_size"></a>
+			<a href="eventNow.jsp"> <img src = "images/banner_img/이벤트.jpg" class="banner_size" onerror="this.parentNode.style.display='none'"></a>
 		</div>
 	</div>
 </div>
 
-<%
+<div class="container" align="center">
+	<div class="row">
+		<div class="col">
+			<a href="eventProduct.jsp?category=채소&categoryNum=0"> <img src = "images/banner_img/채소.jpg" class="banner_size" onerror="this.parentNode.style.display='none'"></a>
+		</div>
+	</div>
+</div>
+
+<div class="container" align="center">
+	<div class="row">
+		<div class="col">
+			<a href="eventProduct.jsp?category=과일·견과·쌀&categoryNum=1"> <img src = "images/banner_img/과일·견과·쌀.jpg" class="banner_size" onerror="this.parentNode.style.display='none'"></a>
+		</div>
+	</div>
+</div>
+
+<div class="container" align="center">
+	<div class="row">
+		<div class="col">
+			<a href="eventProduct.jsp?category=수산·해산·건어물&categoryNum=2"> <img src = "images/banner_img/수산·해산·건어물.jpg" class="banner_size" onerror="this.parentNode.style.display='none'"></a>
+		</div>
+	</div>
+</div>
+
+<div class="container" align="center">
+	<div class="row">
+		<div class="col">
+			<a href="eventProduct.jsp?category=정육·계란&categoryNum=3"> <img src = "images/banner_img/정육·계란.jpg" class="banner_size" onerror="this.parentNode.style.display='none'"></a>
+		</div>
+	</div>
+</div>
+
+<div class="container" align="center">
+	<div class="row">
+		<div class="col">
+			<a href="eventProduct.jsp?category=국·반찬·메인요리&categoryNum=4"> <img src = "images/banner_img/국·반찬·메인요리.jpg" class="banner_size" onerror="this.parentNode.style.display='none'"></a>
+		</div>
+	</div>
+</div>
+
+<div class="container" align="center">
+	<div class="row">
+		<div class="col">
+			<a href="eventProduct.jsp?category=샐러드·간편식&categoryNum=5"> <img src = "images/banner_img/샐러드·간편식.jpg" class="banner_size" onerror="this.parentNode.style.display='none'"></a>
+		</div>
+	</div>
+</div>
+
+<div class="container" align="center">
+	<div class="row">
+		<div class="col">
+			<a href="eventProduct.jsp?category=면·양념·오일&categoryNum=6"> <img src = "images/banner_img/면·양념·오일.jpg" class="banner_size" onerror="this.parentNode.style.display='none'"></a>
+		</div>
+	</div>
+</div>
+
+<div class="container" align="center">
+	<div class="row">
+		<div class="col">
+			<a href="eventProduct.jsp?category=생수·음료·우유·커피&categoryNum=7"> <img src = "images/banner_img/생수·음료·우유·커피.jpg" class="banner_size" onerror="this.parentNode.style.display='none'"></a>
+		</div>
+	</div>
+</div>
+
+<div class="container" align="center">
+	<div class="row">
+		<div class="col">
+			<a href="eventProduct.jsp?category=간식·과자·떡&categoryNum=8"> <img src = "images/banner_img/간식·과자·떡.jpg" class="banner_size" onerror="this.parentNode.style.display='none'"></a>
+		</div>
+	</div>
+</div>
+
+<div class="container" align="center">
+	<div class="row">
+		<div class="col">
+			<a href="eventProduct.jsp?category=건강식품&categoryNum=9"> <img src = "images/banner_img/건강식품.jpg" class="banner_size" onerror="this.parentNode.style.display='none'"></a>
+		</div>
+	</div>
+</div>
+
+<div class="container" align="center">
+	<div class="row">
+		<div class="col">
+			<a href="eventProduct.jsp?category=와인&categoryNum=10"> <img src = "images/banner_img/와인.jpg" class="banner_size" onerror="this.parentNode.style.display='none'"></a>
+		</div>
+	</div>
+</div>
+
+
+
+<%-- <%
 	//String path = "C:\\eclipse_work\\Shop\\src\\main\\webapp\\img\\";
 	String path = "C:\\eclipse_workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\ShoppingMall\\images\\banner_img\\";
 	File folder = new File(path);
@@ -106,21 +196,21 @@ a:hover{
 	<div class="container" align="center">
 		<div class="row">
 			<div class="col">
-				<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>"> <img src="./images/banner_img/<%=fileName %>" class="banner_size" ></a>
+				<a href="eventProduct.jsp?category=<%=category %>&categoryNum=<%=categoryNum %>"> <img src="./images/banner_img/<%=fileName %>" class="banner_size" onerror="this.parentNode.style.display='none'" ></a>
 			</div>
 		</div>
 	</div>
 <%
 		}
 	}
-%>
+%> --%>
 
 <!--기본 배너 틀 #부분과 ... 부분 알맞게 수정 -->
 
 <!-- 	<div class="container" align="center">
 		<div class="row">
 			<div class="col">
-				<a href="#"> <img src = "img/..." class="banner_size"></a>
+				<a href="#"> <img src = "img/..." class="banner_size" onerror="this.parentNode.style.display='none'"></a>
 			</div>
 		</div>
 	</div> -->

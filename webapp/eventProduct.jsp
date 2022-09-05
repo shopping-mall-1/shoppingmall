@@ -259,7 +259,7 @@ a:hover{
 			<div class="col-lg-4 col-md-6">
 				<a id="choose" href="product.jsp?code=<%=rs.getInt("code") %>">
 				<section>
-					<img src="./img/product_img/<%=rs.getString("image") %>" class="img_size">
+					<img src="./<%=rs.getString("image") %>" class="img_size">
 					<br><br>
 					<h4 class="product"><%=rs.getString("name") %></h4>
 					
