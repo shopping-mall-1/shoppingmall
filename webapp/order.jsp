@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/order.css">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
+<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
 <title>마켓컬리 :: 주문서</title>
 </head>
 	<%
@@ -21,15 +21,41 @@
 		String[] str_code = request.getParameterValues("buy");
 		
 		int[] code = new int[str_code.length];
-		for(int i=0;i<str_code.length;i++){
-				code[i] = Integer.parseInt(str_code[i]);
-				System.out.println("체크된 값 : "+code[i]+" ");
+		Connection con_order = null;
+		DataSource ds_order = (DataSource)this.getServletContext().getAttribute("dataSource");
+		con_order = ds_order.getConnection();
+		
+		Statement stmt_order = null;
+		String query_order="";
+		
+		for(int i=0;i<code.length;i++){
+			code[i] = Integer.parseInt(str_code[i]);
+			
 		}
 
+		
+		
 		%>
 
 <body>
 	<script>
+	
+	
+ 	$(document).ready(function(){
+ 		  $(".b7t1").click(function(){        
+ 		      $("#popup").css('display','flex').hide().fadeIn();
+ 		      //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 fadeIn()으로 효과
+ 		  });
+ 		  $("#close").click(function(){
+ 		      modalClose(); //모달 닫기 함수 호출
+ 		  });
+ 		  function modalClose(){
+ 		      $("#popup").fadeOut(); //페이드아웃 효과
+ 		  }
+ 		    
+
+ 		 	
+ 		});
  	//총 금액 구하기
  	function sumPrice(){
 		this.nums = [];
@@ -48,7 +74,31 @@
 	 	$('.b7t1').text(this.sum+"원 결제하기");
 	   
  	}
-	
+
+	function gotoOrder(){
+		<%
+		//결제하시겠습니까? 확인 -> cart테이블 isorder='y' 결제처리
+		
+		for(int i=0;i<code.length;i++){
+
+			stmt_order = con_order.createStatement();
+			query_order = "UPDATE cart SET isorder = 'y' WHERE p_code = "+code[i]+" AND customer='"+userid+"'";
+
+			stmt_order.executeUpdate(query_order);
+			System.out.println(code[i]);
+			System.out.println("장바구니 결제처리 쿼리 : "+query_order);
+			
+			//stmt_list.close();
+			//rs_list.close();
+			query_order = "";
+			stmt_order = null;
+		
+		}
+		
+		%>
+		location.href="orderproc.jsp"; //결제완료->주문내역 이동
+	}
+ 		
 	</script>
 	<jsp:include page="header.jsp" />
 
@@ -145,14 +195,16 @@
 					
 			%>
 			<div class="box_2">
+				<input id ="code" type="hidden" value="<%=codeList.get(i)%>">
+			
 				<span class="b2t2_1"><img src="<%=imageList.get(i) %>"></span>
 				<span class="b2t2_2">
-					<span class="b2t2_2_1"><%=nameList.get(i) %></span>
+					<span class="b2t2_2_1" ><%=nameList.get(i) %></span>
 					<span data-testid="content-product-name" class="b2t2_2_2">
 							
 					</span>
 				</span>
-				<span class="b2t2_3"><%=countList.get(index) %>개</span>
+				<span class="b2t2_3" value="<%=countList.get(index) %>"><%=countList.get(index) %></span>
 				<span class="b2t2_4">
 					<span class="b2t2_4_1"><%=priceList.get(index) %></span>
 				</span>
@@ -271,19 +323,38 @@
 			</div>
 			<div class="box_7">
 				<button class="box_7_button" type="button" width="240"
-					height="56" radius="3">
+					height="56" radius="3"  style="cursor:pointer;">
 					<span class="b7t1"><script>sumPrice()</script></span>
 				</button>
 			</div>
 
 		</div>
 	
-	
+
 
 	</div>
-	</div>
-
-
+	 		 
+				<div class="popup-wrap" id="popup" style="display:none;"> 
+	    		<div class="popup">
+	      			<div class="popup-head">	
+	          		<span class="head-title">Kurly</span>
+	      </div>
+	      			<div class="popup-body">	
+	        		<div class="body-content">
+	          		<div class="body-titlebox">
+	          		</div>
+	          		<div class="body-contentbox">
+	          	  	<p>결제하시겠습니까? </p>
+	            		
+	         		 </div>
+	        		</div>
+	     			 </div>
+	      			<div class="popup-foot" style="display:flex;"> 
+	       				 <span class="pop-btn confirm" id="confirm" onclick="gotoOrder()">확인</span>
+	        			 <span class="pop-btn close" id="close" style="color:white; font-size:15px;">아니오</span>
+	      			</div>
+	    		</div>
+			</div>
 
 </body>
 </html>

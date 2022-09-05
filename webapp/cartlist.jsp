@@ -256,7 +256,7 @@ $(document).on('click','.check_child',function(){
                         <div class="sum_value" style="margin-left:20px;"><%=price*p_count %></div>
                     </div>
                     <div class="subdiv">
-                        <div class="basketcmd"><button  class="deleteThis" onclick="deleteThis()">삭제</button></div>
+                        <div class="basketcmd"><button  class="deleteThis" onclick="deleteThis()" style="cursor:pointer;">삭제</button></div>
                     </div>
                 </div>
                 
@@ -362,8 +362,8 @@ $(document).on('click','.check_child',function(){
  	</script>
  	 
            <div class="right-align basketrowcmd">
-            <button type="button" onclick="checkDelete()">선택상품삭제</button>
-            <button type="button" onclick="allDelete()">장바구니비우기</button>
+            <button type="button" onclick="checkDelete()" style="cursor:pointer;">선택상품삭제</button>
+            <button type="button" onclick="allDelete()" style="cursor:pointer;">장바구니비우기</button>
         </div>
 
         <div class="bigtext right-align sumcount" id="sum_p_num"><script> sumPnum();</script></div>
@@ -373,7 +373,7 @@ $(document).on('click','.check_child',function(){
         <div id="goorder" class="">
             <div class="clear"></div>
             <div class="buttongroup center-align cmd">
-                <input type="submit" value="선택 상품 주문하기" width="100px">
+                <input type="submit" value="선택 상품 주문하기" width="100px" style="cursor:pointer;">
             </div>
         </div>
         </div>
