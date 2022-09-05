@@ -76,7 +76,7 @@ text-align: center;
 }
 
 #count_div{
-	width:150px;
+	width:400px;
 	display:flex;
 	margin-left:20px;
 	margin-right:20px;
@@ -89,8 +89,8 @@ text-align: center;
 
 .btn {
 	background-color: rgb(95, 0, 128);
-	padding: 15px 30px;
-	margin: 2px;
+	padding: 15px 50px;
+	margin: 30px;
 	border: none;
 	color: black;
 	text-align: center;
@@ -102,7 +102,7 @@ text-align: center;
 	cursor: pointer;
 	-webkit-transition-duration: 0.4s;
 	transition-duration: 0.4s;
-	width: 160px;
+	width: 380px;
 	height: 50px;
 	
 }
@@ -132,17 +132,27 @@ function count(type)  {
 	  
 	  // 현재 화면에 표시된 값
 	  let number = resultElement.innerText;
+	  let stock = $('#stock').text();
 	 
 	  // 더하기 : 재고보다 많게 선택하면 안된다고 알려주기
 	  if(type === 'plus') {
 		if(parseInt(number)-1>=0){
 			$('#btn_minus').attr('disabled',false);
-			number = parseInt(number)+1;
-			plusPrice();
+			if(parseInt(number)+1>stock){
+				alert("재고가 부족합니다.");
+			}else{
+				number = parseInt(number)+1;
+				plusPrice();
+			}
+		
 		}
 		else{
-			number = parseInt(number) + 1;
-			plusPrice();
+			if(parseInt(number)+1>stock){
+				alert("재고가 부족합니다.");
+			}else{
+				number = parseInt(number)+1;
+				plusPrice();
+			}
 		}
 			
 	  }else if(type === 'minus')  { //빼기
@@ -158,7 +168,7 @@ function count(type)  {
 	  }
 	  // 결과 출력. 선택한 수량
 	  resultElement.innerText = number;
- 
+
 }
 	
 function gotoCart() {
@@ -181,7 +191,21 @@ $(function(){
 	      $("#popup").fadeOut(); //페이드아웃 효과
 	  }
 	    
+	  if($('#stock').text()=='0'){
+		  //장바구니 담기, 바로주문 버튼 없애고 품절 버튼 나오게
+		  $('#btn_cart').css('display','none');
+		  $('#btn_order').css('display','none');
+		  
+		  $('#btn_out').css('display','block');
+	  }else{
+		  $('#btn_cart').css('display','block');
+		  $('#btn_order').css('display','block');
+		  
+		  $('#btn_out').css('display','none');		  
+	  }
 	});
+	
+	
 	
 	
 </script>
@@ -224,9 +248,14 @@ $(function(){
 			<hr size=1px>
 	
 			<div id="count_div">
-				<h4 style="font-weight: bold">수량</h4><div id="count_div1"><input id='btn_minus' type='button' onclick='count("minus")' value='-' style="width:25px" /></div>
+				<h4 style="font-weight: bold">수량</h4><div id="count_div1"><input id='btn_minus' type='button' style="width:50px" onclick='count("minus")' value='-' disabled="disabled"/></div>
 				<div id='result'>1</div><!-- 선택한 수량으로 바꾸기 -->
-				<div id="count_div1"><input id='btn_plus' type='button' onclick='count("plus")' value='+' style="width:25px" /></div>
+				<div id="count_div1"><input id='btn_plus' type='button' style="width:50px" onclick='count("plus")' value='+'/></div>
+				<div style="display:flex;"> 
+					<h6 style="font-weight: bold;">재고</h6>
+					<div id="stock" style=" margin-left:20px;"><%=item.getStock() %></div>
+					<h6 style="font-weight: bold;">개</h6>
+				</div>	
 			</div>
 			<hr size=1px>			
 			<div id = "side_right_box2">
@@ -284,8 +313,7 @@ $(function(){
 		
 			<div id = "side_right_box">
 				<button class="btn btn1" id="btn_cart" onclick="sendCartData()">장바구니 담기</button>
-				<button class="btn btn2" id="btn_order">바로주문</button>
-
+				<button class="btn btn1" id="btn_out" style="display:none;">품절</button>
 			</div><br>
  
 			<div class="popup-wrap" id="popup" style="display:none;"> 
@@ -412,7 +440,7 @@ function search(){
 		while(rs.next()) {
 			 
 %>
- 	<tr onMouseover="this.style.background='#46D2D2';" onmouseout="this.style.background='white';">
+ 	<tr onMouseover="this.style.background='#f9f2ff';" onmouseout="this.style.background='white';">
 		<td><%=rs.getInt("seq") %></td>
 		<td style="text-align:left;">
 			<a id="hypertext" href="view.jsp?code=<%=item.getCode()%>&seqno=<%=rs.getInt("seqno") %>&page=<%=pageNum %>&searchType=<%=searchType %>&keyword=<%=keyword %>" onMouseover='this.style.textDecoration="underline"' 
