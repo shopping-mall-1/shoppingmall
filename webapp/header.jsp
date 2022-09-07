@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,22 +59,20 @@ function press(){
 <body>
 
 <div id="container"  align="center">
-
 	<div id="wrap">
 	<div id="user_menu">
 		<ul id="user_menu">
-			<li style="margin:10px; "><a href="signup.jsp">회원가입</a></li>  <!-- 각 기능이 있는 파일 링크 걸기 -->
 			<%
 				String username = (String)session.getAttribute("name");
 				String role = (String)session.getAttribute("role");
 				if(username == null) {
 			%>
+			<li style="margin:10px; "><a href="signup.jsp">회원가입</a></li>
 			<li style="margin:10px;"><a href="login.jsp"> 로그인</a>  </li>
 			<% }
 				else {
-					System.out.println("헤더: " + role);
 					if(role.equals("none")) {
-			%><!-- 로그아웃 링크 추가하기(Account/logout.jsp) -->
+			%>
 						<li style="margin:10px;"><a href="mypage.jsp"><b><%=username %></b></a> 님  </li>
 			<%		} else if(role.equals("admin")) { %>
 						<li style="margin:10px;"><a href="mypage_admin.jsp"><b><%=username %></b></a> 님  </li>
@@ -85,44 +82,40 @@ function press(){
 			<li style="margin:10px;"><a href="#"> 고객센터 ▼</a> </li>
 		</ul>
 	</div>
-		<header>
-			<a href="index.jsp" style='margin:10px; padding:0'><img src='css/logo.svg' style='margin:10px; padding:0'></a>
-			<span style='color:rgb(95, 0, 128); margin:0px;'>마켓컬리</span>
-		  	<div class="search">
-  				<input type="text" id="findKeyword" name="findKeyword" placeholder="검색어를 입력해주세요" onkeydown="press()" onkeyup="characterCheck(this)">
-  				<img id="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" onclick="findProduct()">
-			</div>
-			<div class="menu_personal">
-				<a href="#"><img src="css/gps.png" width="30px" height="30px"></a> <!-- 각 기능이 있는 파일 링크 걸기 -->
-				<a href="cartlist.jsp"><img src="css/cart.png" width="30px" height="30px"></a>
-				<a href="orderlist.jsp"><img src="images/list.png" width="30px" height="30px"></a>
-				
-			</div>
-			
-		</header>
-		<div id="menu">	
+	<header>
+		<a href="index.jsp" style='margin:10px; padding:0'><img src='css/logo.svg' style='margin:10px; padding:0'></a>
+		<span style='color:rgb(95, 0, 128); margin:0px;'>마켓컬리</span>
+		<div class="search">
+			<input type="text" id="findKeyword" name="findKeyword" placeholder="검색어를 입력해주세요" onkeydown="press()" onkeyup="characterCheck(this)">
+			<img id="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" onclick="findProduct()">
+		</div>
+		<div class="menu_personal">
+			<a href="#"><img src="css/gps.png" width="30px" height="30px"></a> <!-- 각 기능이 있는 파일 링크 걸기 -->
+			<a href="cartlist.jsp"><img src="css/cart.png" width="30px" height="30px"></a>
+			<a href="orderlist.jsp"><img src="images/list.png" width="30px" height="30px"></a>
+		</div>
+	</header>
+	<div id="menu">	
 		<div class="dropdown">
-		      <div class="menu_list" style="display:flex; align-items:center; ">
-		      <img src="css/hamburger.png" style="margin:0;">
-		      <span class="dropbtn"  style="margin:0;">카테고리</span>
-		      
-		       <div id="menu_list" style="  display:flex;">			      
-			       <div style=" align-items:center; margin-left:160px;">
-				      <a href="productAll.jsp?menu=신상품"><span>신상품</span> </a>
-			      </div>
-	    		 <div style="align-items:center; margin-left:160px;">
-				      <a href="productAll.jsp?menu=베스트"><span>베스트</span> </a>
-			      </div>
-			      <div style=" align-items:center; margin-left:160px;">
-				      <a href="productAll.jsp?menu=알뜰쇼핑"><span>알뜰쇼핑</span> </a>
-			      </div>
-	    		 <div style=" align-items:center; margin-left:160px;">
-				      <a href="eventList.jsp?menu=특가/혜택"><span>특가/혜택</span> </a>
-			      </div>	
-		     </div> 
-		      </div>
-
-		      <div class="dropdown-content" style="margin:0;">
+			<div class="menu_list" style="display:flex; align-items:center; ">
+				<img src="css/hamburger.png" style="margin:0;">
+				<span class="dropbtn"  style="margin:0;">카테고리</span>
+				<div id="menu_list" style="  display:flex;">			      
+					<div style=" align-items:center; margin-left:160px;">
+						<a href="productAll.jsp?menu=신상품"><span>신상품</span> </a>
+					</div>
+	    		 	<div style="align-items:center; margin-left:160px;">
+						<a href="productAll.jsp?menu=베스트"><span>베스트</span> </a>
+					</div>
+					<div style=" align-items:center; margin-left:160px;">
+						<a href="productAll.jsp?menu=알뜰쇼핑"><span>알뜰쇼핑</span> </a>
+					</div>
+					<div style=" align-items:center; margin-left:160px;">
+						<a href="eventList.jsp?menu=특가/혜택"><span>특가/혜택</span> </a>
+					</div>	
+				</div> 
+			</div>
+			<div class="dropdown-content" style="margin:0;">
 				<ul id="nav-v2" style="margin-left:0; padding-left:0;'">
 					<li class="menu-v2"><a href="productList.jsp?category=채소&categoryNum=0">채소</a>
 						<ul class="submenu">
@@ -230,15 +223,11 @@ function press(){
 						</ul>
 					</li>
 				</ul>
-
-		        
-     	</div>
-			   </div>
-
-		     </div>
-
+     		</div>
 		</div>
-		</div>
-		<hr>
-		</body>
-		</html>
+	</div>
+	</div>
+</div>
+<hr>
+</body>
+</html>

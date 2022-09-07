@@ -1,12 +1,11 @@
 <%@page import="javax.sql.DataSource"%>
 <%@page import="java.sql.*"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>╦╤додц╦╝ :: аж╧╝Ё╩©╙</title>
+<meta charset="UTF-8">
+<title>К╖┬Л╪⌠Л╩╛К╕╛ :: Лё╪К╛╦К┌╢Л≈╜</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" type="text/css" href="css/orderlist.css">
 </head>
@@ -14,7 +13,7 @@
 <jsp:include page='header.jsp'/>
 <script>
 $(document).ready(function(){
-	//orderевюл╨М©║ гЖюГю╞юЗ ╬Ью╦╦И аж╧╝Ё╩©╙ ╬Ь╫ю╢о╢ы&&╦Я╥о div ╬Ь╬ж╠Б. южю╦╦И ╦Я╥о цБ╥б
+	//orderМ┘▄Л²╢К╦■Л≈░ М≤└Л·╛Л°═Л═─ Л≈├Л°╪К╘╢ Лё╪К╛╦К┌╢Л≈╜ Л≈├Л┼╣К▀┬К▀╓&&К╙╘К║² div Л≈├Л∙═Й╦╟. Л·┬Л°╪К╘╢ К╙╘К║² Л╤°К═╔
 	if($('#checkOrder').val()=='0'){
 		$('#no_order').css('display','block');
 		$('#orderlist_exist').css('display','none');
@@ -46,33 +45,33 @@ $(document).ready(function(){
 	if(rs_check.next()){
 		orderCount = rs_check.getInt(1);
 	}
-	System.out.println(userid+" аж╧╝Ё╩©╙ cnt : "+orderCount+"╟Ё");
+	System.out.println(userid+" Лё╪К╛╦К┌╢Л≈╜ cnt : "+orderCount+"Й╟°");
 
 	con_check.close();
 	stmt_check.close();
 
 %>
 <div id="container">
-	<center>аж╧╝Ё╩©╙</center>
+	<center>Лё╪К╛╦К┌╢Л≈╜</center>
 	<input id="checkOrder" type="hidden" value="<%=orderCount%>">
-	<div id="no_order"><center id="no_order" style=" align-items: center; margin-top:50px;">аж╧╝Ё╩©╙юл ╬Ь╫ю╢о╢ы.</center></div>
+	<div id="no_order"><center id="no_order" style=" align-items: center; margin-top:50px;">Лё╪К╛╦К┌╢Л≈╜Л²╢ Л≈├Л┼╣К▀┬К▀╓.</center></div>
 	
 	<div id="orderlist_exist">
 			<div class="box_2">
 			<input id ="code" type="hidden" value="">
-			<span style="width:100px;">аж╧╝╧Ьхё</span>
-			<span style="width:100px;">╩ГаЬ</span>
+			<span style="width:100px;">Лё╪К╛╦К╡┬М≤╦</span>
+			<span style="width:100px;">Л┌╛Л╖└</span>
 			
-			<span style="width:400px;">юл╦╖</span>
-			<span style="width:100px;">╟Ё╪Ж</span>
+			<span style="width:400px;">Л²╢К╕└</span>
+			<span style="width:100px;">Й╟°Л┬≤</span>
 			
-			<span style="width:100px;">╟Аа╕╠щ╬в</span>
+			<span style="width:100px;">Й╡╟Л═°Й╦┬Л∙║</span>
 			
-			<span style="width:100px;">аж╧╝Ё╞б╔</span>
-			<span style="width:100px;">аж╧╝╩Себ</span>
+			<span style="width:100px;">Лё╪К╛╦К┌═Л╖°</span>
+			<span style="width:100px;">Лё╪К╛╦Л┐│М┐°</span>
 			</div>
 	<%
-		//аж╧╝Ё╩©╙ ╟║а╝©ю╠Б
+		//Лё╪К╛╦К┌╢Л≈╜ Й╟─Л═╦Л≤╓Й╦╟
 		Connection con_order = null;
 		DataSource ds_order = (DataSource)this.getServletContext().getAttribute("dataSource");
 		con_order = ds_order.getConnection();

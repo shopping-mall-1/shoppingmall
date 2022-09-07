@@ -7,7 +7,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-<h3>관리자 임시 페이지</h3>
+<jsp:include page="header.jsp" />
 <a href="index.jsp">처음으로</a><br>
 <a href="memberList.jsp">회원 정보 확인</a><br>
 <a href="addProduct.jsp">상품 등록</a><br>

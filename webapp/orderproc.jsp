@@ -1,12 +1,12 @@
 <%@page import="javax.sql.DataSource"%>
 <%@page import="java.sql.*"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>ÁÖ¹® db Ã³¸®</title>
+<meta charset="UTF-8">
+<title>ì£¼ë¬¸ db ì²˜ë¦¬</title>
 </head>
 <body>
 <%
@@ -25,14 +25,14 @@
 					"ON a.customer = b.id WHERE a.isorder = 'y'"+
 			")";
 	
-	//insertÄõ¸® ½ÇÇà
+	//insertì¿¼ë¦¬ ì‹¤í–‰
 	stmt_insert = con_insert.createStatement();
 	stmt_insert.executeUpdate(query_insert);
 	
 	con_insert.close();
 	stmt_insert.close();
 	
-	//Àç°í ¼öÁ¤ÇÏ±â (product Å×ÀÌºí)
+	//ìž¬ê³  ìˆ˜ì •í•˜ê¸° (product í…Œì´ë¸”)
 	Connection con_alter = null;
 	DataSource ds_alter = (DataSource)this.getServletContext().getAttribute("dataSource");
 	con_alter = ds_alter.getConnection();
@@ -48,7 +48,7 @@
 	con_alter.close();
 	stmt_alter.close();	
 	
-	//cartÅ×ÀÌºí isorder="y" ÀÎ Çà »èÁ¦ÇÏ±â (°áÁ¦ÇÑ Á¦Ç° Àå¹Ù±¸´Ï¿¡¼­ Áö¿ì±â)
+	//cartí…Œì´ë¸” isorder="y" ì¸ í–‰ ì‚­ì œí•˜ê¸° (ê²°ì œí•œ ì œí’ˆ ìž¥ë°”êµ¬ë‹ˆì—ì„œ ì§€ìš°ê¸°)
 	Connection con_delete = null;
 	DataSource ds_delete = (DataSource)this.getServletContext().getAttribute("dataSource");
 	con_delete = ds_delete.getConnection();
@@ -56,7 +56,7 @@
 	Statement stmt_delete = null;
 	String query_delete = "delete from cart where isorder='y'";	
 	
-	//delete Äõ¸® ½ÇÇà
+	//delete ì¿¼ë¦¬ ì‹¤í–‰
 	stmt_delete = con_delete.createStatement();
 	stmt_delete.executeUpdate(query_delete);
 	
